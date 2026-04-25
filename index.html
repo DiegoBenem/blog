@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Blog de desenvolvimento pessoal, autoconhecimento e crescimento interior. Artigos práticos para reprogramar sua mente e transformar sua vida.">
+<meta name="keywords" content="desenvolvimento pessoal, autoconhecimento, reprogramar a mente, crescimento pessoal, hábitos mentais">
+<meta name="author" content="Diego Benem Salvá">
+<meta property="og:title" content="Nova Consciência — Blog de Desenvolvimento Pessoal">
+<meta property="og:description" content="Artigos práticos para reprogramar sua mente e transformar sua vida em 30 dias.">
+<meta property="og:url" content="https://diegobenem.github.io/blog/">
+<title>Nova Consciência — Blog de Desenvolvimento Pessoal</title>
+<link rel="canonical" href="https://diegobenem.github.io/blog/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink2: #3d3d5c;
+    --muted: #8888aa;
+    --bg: #fafaf7;
+    --bg2: #f2f2ec;
+    --gold: #c9a84c;
+    --gold-light: #f0d98a;
+    --accent: #2d6a4f;
+    --accent2: #52b788;
+    --cross: #7b3f00;
+    --cross-light: #d4a373;
+    --white: #ffffff;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent2));
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,26,46,0.08);
+    z-index: 100;
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.875rem;
+    color: var(--ink2);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--ink) !important;
+    color: var(--white) !important;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 500 !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink2);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1.5px solid var(--ink2);
+    color: var(--ink2);
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(26,26,46,0.1);
+    width: 100%;
+    max-width: 360px;
+    position: relative;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, var(--gold-light), transparent, var(--accent2));
+    z-index: -1;
+    opacity: 0.4;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--bg2);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
+  .mini-article {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--bg2);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .mini-article:last-child { border-bottom: none; }
+  .mini-article:hover { opacity: 0.7; }
+  .mini-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+  .mini-title { font-size: 0.82rem; color: var(--ink2); line-height: 1.4; }
+
+  /* ─── ARTICLES GRID ─── */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    color: var(--ink);
+  }
+  .section-title span { color: var(--gold); }
+  .see-all {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .see-all:hover { color: var(--gold); }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .article-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(26,26,46,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(26,26,46,0.1);
+  }
+  .article-card.featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+  .article-thumb {
+    height: 180px;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink2) 100%);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .article-card.featured .article-thumb {
+    width: 360px;
+    height: auto;
+    min-height: 220px;
+  }
+  .thumb-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(201,168,76,0.5) 20px,
+      rgba(201,168,76,0.5) 21px
+    );
+  }
+  .thumb-number {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-family: var(--serif);
+    font-size: 4rem;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    font-weight: 700;
+  }
+  .thumb-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    opacity: 0.6;
+  }
+  .article-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .article-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .article-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+  .article-card.featured .article-title { font-size: 1.5rem; }
+  .article-excerpt {
+    font-size: 0.875rem;
+    color: var(--ink2);
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .article-meta span + span::before {
+    content: '·';
+    margin-right: 0.75rem;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .divider hr {
+    border: none;
+    border-top: 1px solid rgba(26,26,46,0.08);
+  }
+
+  /* ─── CHRISTIAN SECTION ─── */
+  .christian-section {
+    background: linear-gradient(180deg, var(--bg) 0%, #1a1a2e 8%, #1a1a2e 100%);
+    padding: 0 0 4rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+  .christian-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem 0;
+  }
+  .christian-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .cross-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .cross-v {
+    position: absolute;
+    width: 4px;
+    height: 56px;
+    background: var(--cross-light);
+    border-radius: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cross-h {
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    background: var(--cross-light);
+    border-radius: 2px;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .cross-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,163,115,0.25) 0%, transparent 70%);
+  }
+  .christian-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cross-light);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .christian-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .christian-title em { color: var(--cross-light); font-style: italic; }
+  .christian-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.75;
+    max-width: 560px;
+    margin: 0 auto 0.5rem;
+    font-weight: 300;
+  }
+  .lock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(212,163,115,0.15);
+    border: 1px solid rgba(212,163,115,0.3);
+    color: var(--cross-light);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-top: 1rem;
+  }
+  .lock-icon {
+    width: 12px;
+    height: 14px;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lock-body {
+    width: 10px;
+    height: 8px;
+    border: 1.5px solid currentColor;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
+  .lock-shackle {
+    width: 6px;
+    height: 5px;
+    border: 1.5px solid currentColor;
+    border-bottom: none;
+    border-radius: 3px 3px 0 0;
+    position: absolute;
+    top: 0;
+  }
+
+  .christian-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .christian-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,163,115,0.15);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s, border-color 0.25s;
+    cursor: pointer;
+  }
+  .christian-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(212,163,115,0.35);
+  }
+  .christian-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cross-light), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .christian-card:hover::after { opacity: 1; }
+  .card-verse {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--cross-light);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba(212,163,115,0.4);
+  }
+  .card-ref {
+    font-size: 0.72rem;
+    color: rgba(212,163,115,0.6);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .card-christian-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.35;
+  }
+  .card-christian-excerpt {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .card-lock {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0.4;
+  }
+  .card-lock svg { width: 14px; height: 14px; }
+
+  .christian-cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .btn-christian {
+    background: var(--cross-light);
+    color: var(--cross);
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-christian:hover { background: var(--white); transform: translateY(-2px); }
+  .christian-coming {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.75rem;
+  }
+
+  /* ─── NEWSLETTER ─── */
+  .newsletter {
+    background: var(--ink);
+    padding: 4rem 2rem;
+  }
+  .newsletter-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .newsletter h2 {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+  .newsletter h2 em { color: var(--gold); font-style: italic; }
+  .newsletter p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .newsletter-form input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .newsletter-form input:focus { border-color: var(--gold); }
+  .newsletter-form button {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: var(--gold-light); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0f0f1a;
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+  }
+  .footer-logo span { color: var(--gold); }
+  footer p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.2);
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  /* ─── FLOATING CTA ─── */
+  #floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--ink);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(26,26,46,0.25);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #floating-cta.visible { transform: translateY(0); opacity: 1; }
+  #floating-cta:hover { background: var(--gold); transform: translateY(-2px); }
+  .cta-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-visual { display: none; }
+    .article-card.featured { flex-direction: column; }
+    .article-card.featured .article-thumb { width: 100%; min-height: 180px; }
+    .nav-links { display: none; }
+    .newsletter-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Nova <span>Consciência</span></a>
+    <div class="nav-links">
+      <a href="#artigos">Artigos</a>
+      <a href="#fe-crista">Fé & Mente</a>
+      <a href="https://pay.hotmart.com/S98384347S" target="_blank" class="nav-cta">Adquirir Ebook →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-label">Desenvolvimento Pessoal · Autoconhecimento</p>
+    <h1>Desperte o potencial que já existe <em>dentro de você</em></h1>
+    <p>Artigos práticos, exercícios e reflexões para reprogramar sua mente, fortalecer seus hábitos e construir a melhor versão de si mesmo — um degrau de cada vez.</p>
+    <div class="hero-btns">
+      <a href="#artigos" class="btn-primary">Ler os artigos</a>
+      <a href="https://pay.hotmart.com/S98384347S" target="_blank" class="btn-secondary">Ver o Ebook</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">72</span>
+          <span class="stat-label">Degraus</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">30</span>
+          <span class="stat-label">Dias</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Volumes</span>
+        </div>
+      </div>
+      <div class="mini-article">
+        <div class="mini-dot"></div>
+        <span class="mini-title">Como reprogramar a mente em 30 dias</span>
+      </div>
+      <div class="mini-article">
+        <div class="mini-dot" style="background:var(--gold)"></div>
+        <span class="mini-title">5 hábitos que transformam sua mentalidade</span>
+      </div>
+      <div class="mini-article">
+        <div class="mini-dot" style="background:var(--cross-light)"></div>
+        <span class="mini-title">Fé e autoconhecimento: o caminho interior</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="section" id="artigos">
+  <div class="section-header">
+    <h2 class="section-title">Artigos <span>em destaque</span></h2>
+    <a href="#artigos" class="see-all">Ver todos →</a>
+  </div>
+
+  <div class="articles-grid">
+
+    <!-- FEATURED -->
+    <a href="artigos/reprogramar-a-mente.html" class="article-card featured">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #1a1a2e, #2d6a4f);">
+        <div class="thumb-pattern"></div>
+        <div class="thumb-number">01</div>
+        <div class="thumb-icon">🧠</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag">Reprogramação Mental</p>
+        <h3 class="article-title">Como Reprogramar a Mente em 30 Dias: O Guia Prático Completo</h3>
+        <p class="article-excerpt">Sua mente é um sistema operacional — e ele pode ser atualizado. Descubra como aplicar os princípios da neuroplasticidade para criar novos padrões de pensamento, eliminar crenças limitantes e construir uma mentalidade de crescimento passo a passo.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>8 min de leitura</span>
+          <span>Desenvolvimento Pessoal</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD 2 -->
+    <a href="artigos/habitos-mentais.html" class="article-card">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #3d3d5c, #c9a84c);">
+        <div class="thumb-pattern"></div>
+        <div class="thumb-icon">⚡</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag">Hábitos</p>
+        <h3 class="article-title">5 Hábitos Mentais que Separam Quem Evolui de Quem Estagna</h3>
+        <p class="article-excerpt">Pequenas decisões diárias constroem — ou destroem — quem você se torna. Aprenda os 5 hábitos que as pessoas em constante crescimento praticam sem perceber.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>5 min de leitura</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD 3 -->
+    <a href="artigos/autoconhecimento.html" class="article-card">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #2d4a3e, #52b788);">
+        <div class="thumb-pattern"></div>
+        <div class="thumb-icon">🌿</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag">Autoconhecimento</p>
+        <h3 class="article-title">Autoconhecimento na Prática: 3 Exercícios para Começar Hoje</h3>
+        <p class="article-excerpt">Não precisamos de anos de terapia para começar a nos conhecer melhor. Três exercícios simples que você pode fazer agora mesmo — em menos de 20 minutos.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>4 min de leitura</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD 4 -->
+    <a href="artigos/mindset-crescimento.html" class="article-card">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #4a1a0c, #d85a30);">
+        <div class="thumb-pattern"></div>
+        <div class="thumb-icon">🔥</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag">Mindset</p>
+        <h3 class="article-title">Mindset de Crescimento: Por Que Algumas Pessoas Nunca Param de Evoluir</h3>
+        <p class="article-excerpt">A diferença entre quem cresce e quem fica parado não é talento nem sorte — é uma forma específica de enxergar os desafios. Descubra como desenvolver esse olhar.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>6 min de leitura</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- CHRISTIAN SECTION -->
+<section class="christian-section" id="fe-crista">
+  <div class="christian-inner">
+    <div class="christian-header">
+      <div class="cross-icon">
+        <div class="cross-glow"></div>
+        <div class="cross-v"></div>
+        <div class="cross-h"></div>
+      </div>
+      <p class="christian-label">Área Especial</p>
+      <h2 class="christian-title">Desenvolvimento Pessoal <em>Cristão</em></h2>
+      <p class="christian-desc">Uma jornada de autoconhecimento enraizada na fé. Reflexões, estudos e práticas que unem a sabedoria das Escrituras com o crescimento interior.</p>
+      <div class="lock-badge">
+        <span class="lock-icon">
+          <span class="lock-shackle"></span>
+          <span class="lock-body"></span>
+        </span>
+        Conteúdo exclusivo — em breve
+      </div>
+    </div>
+
+    <div class="christian-grid">
+
+      <div class="christian-card" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+        <div class="card-lock">
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="card-verse">"Porque sou eu que conheço os planos que tenho para vocês, planos de fazê-los prosperar..."</p>
+        <span class="card-ref">Jeremias 29:11</span>
+        <h4 class="card-christian-title">Propósito Divino: Como Encontrar o Chamado da Sua Vida</h4>
+        <p class="card-christian-excerpt">Uma reflexão profunda sobre como a fé e o autoconhecimento se unem para revelar o propósito que Deus tem para cada um de nós.</p>
+      </div>
+
+      <div class="christian-card" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+        <div class="card-lock">
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="card-verse">"Renovai-vos no espírito da vossa mente."</p>
+        <span class="card-ref">Efésios 4:23</span>
+        <h4 class="card-christian-title">Renovação Mental pela Fé: O que a Neurociência e a Bíblia têm em Comum</h4>
+        <p class="card-christian-excerpt">A ciência e a Palavra de Deus apontam para o mesmo caminho: a transformação começa na mente. Descubra como.</p>
+      </div>
+
+      <div class="christian-card" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+        <div class="card-lock">
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="card-verse">"Tudo posso naquele que me fortalece."</p>
+        <span class="card-ref">Filipenses 4:13</span>
+        <h4 class="card-christian-title">Vencendo Crenças Limitantes com a Força da Fé</h4>
+        <p class="card-christian-excerpt">Crenças limitantes são correntes invisíveis. A fé é a chave. Um estudo prático para libertar sua mente e expandir seus horizontes.</p>
+      </div>
+
+    </div>
+
+    <div class="christian-cta">
+      <button class="btn-christian" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+        Quero ser avisado quando abrir →
+      </button>
+      <p class="christian-coming">Área exclusiva em desenvolvimento. Entre na lista de espera.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Receba conteúdo <em>gratuito</em> toda semana</h2>
+    <p>Entre na lista e receba artigos, exercícios práticos e reflexões sobre desenvolvimento pessoal diretamente no seu e-mail — sem spam, sem enrolação.</p>
+    <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+      <input type="email" id="email-input" placeholder="seu@email.com" required>
+      <button type="submit">Quero receber</button>
+    </form>
+    <p id="subscribe-msg" style="font-size:0.8rem;color:var(--gold);margin-top:0.75rem;display:none;">✓ Obrigado! Em breve você receberá o primeiro conteúdo.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-logo">Nova <span>Consciência</span></p>
+    <p>© 2025 Diego Benem Salvá · <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank">Adquirir os Ebooks</a> · <a href="mailto:diegochimrs@hotmail.com">Contato</a></p>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<a href="https://pay.hotmart.com/S98384347S" target="_blank" id="floating-cta">
+  <span class="cta-dot"></span>
+  Adquirir o Ebook
+</a>
+
+<script>
+  const bar = document.getElementById('progress-bar');
+  const floatingCta = document.getElementById('floating-cta');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = Math.round((scrolled / total) * 100) + '%';
+    if (scrolled > 400) {
+      floatingCta.classList.add('visible');
+    } else {
+      floatingCta.classList.remove('visible');
+    }
+  });
+
+  function handleSubscribe(e) {
+    e.preventDefault();
+    document.getElementById('subscribe-msg').style.display = 'block';
+    document.getElementById('email-input').value = '';
+  }
+</script>
+
+</body>
+</html>

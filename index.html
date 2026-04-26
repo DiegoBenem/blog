@@ -19,8 +19,8 @@
     --ink: #1a1a2e;
     --ink2: #3d3d5c;
     --muted: #8888aa;
-    --bg: #fdf6e3;   /* fundo bege suave */
-    --bg2: #f2f2ec;
+    --bg: #f0ede6;
+    --bg2: #e8e4db;
     --gold: #c9a84c;
     --gold-light: #f0d98a;
     --accent: #2d6a4f;
@@ -272,46 +272,50 @@
     flex-direction: row;
   }
   .article-thumb {
-    height: 180px;
-    background: linear-gradient(135deg, var(--ink) 0%, var(--ink2) 100%);
+    height: 160px;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .article-card.featured .article-thumb {
-    width: 360px;
+    width: 320px;
     height: auto;
-    min-height: 220px;
+    min-height: 200px;
   }
-  .thumb-pattern {
-    position: absolute;
-    inset: 0;
-    opacity: 0.15;
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 20px,
-      rgba(201,168,76,0.5) 20px,
-      rgba(201,168,76,0.5) 21px
-    );
-  }
-  .thumb-number {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    font-family: var(--serif);
-    font-size: 4rem;
-    color: rgba(255,255,255,0.08);
-    line-height: 1;
-    font-weight: 700;
-  }
+  .thumb-pattern { display: none; }
+  .thumb-number { display: none; }
   .thumb-icon {
+    font-size: 3.5rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    transition: transform 0.3s;
+  }
+  .article-card:hover .thumb-icon {
+    transform: scale(1.12);
+  }
+  .thumb-circle {
     position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.5rem;
-    opacity: 0.6;
+  }
+  .thumb-circle2 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .article-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
   .article-tag {
@@ -756,8 +760,8 @@
     <!-- FEATURED -->
     <a href="artigos/reprogramar-a-mente.html" class="article-card featured">
       <div class="article-thumb" style="background: linear-gradient(135deg, #1a1a2e, #2d6a4f);">
-        <div class="thumb-pattern"></div>
-        <div class="thumb-number">01</div>
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
         <div class="thumb-icon">🧠</div>
       </div>
       <div class="article-body">
@@ -775,7 +779,8 @@
     <!-- CARD 2 -->
     <a href="artigos/habitos-mentais.html" class="article-card">
       <div class="article-thumb" style="background: linear-gradient(135deg, #3d3d5c, #c9a84c);">
-        <div class="thumb-pattern"></div>
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
         <div class="thumb-icon">⚡</div>
       </div>
       <div class="article-body">
@@ -792,7 +797,8 @@
     <!-- CARD 3 -->
     <a href="artigos/autoconhecimento.html" class="article-card">
       <div class="article-thumb" style="background: linear-gradient(135deg, #2d4a3e, #52b788);">
-        <div class="thumb-pattern"></div>
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
         <div class="thumb-icon">🌿</div>
       </div>
       <div class="article-body">
@@ -809,7 +815,8 @@
     <!-- CARD 4 -->
     <a href="artigos/mindset-crescimento.html" class="article-card">
       <div class="article-thumb" style="background: linear-gradient(135deg, #4a1a0c, #d85a30);">
-        <div class="thumb-pattern"></div>
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
         <div class="thumb-icon">🔥</div>
       </div>
       <div class="article-body">
@@ -906,12 +913,11 @@
   <div class="newsletter-inner">
     <h2>Receba conteúdo <em>gratuito</em> toda semana</h2>
     <p>Entre na lista e receba artigos, exercícios práticos e reflexões sobre desenvolvimento pessoal diretamente no seu e-mail — sem spam, sem enrolação.</p>
-
-    <form action="https://eepurl.com/nJmqkwVtT" method="post" target="_blank">
-    <input type="email" name="EMAIL" placeholder="Digite seu e-mail" required>
-    <button type="submit">Quero receber</button>
-</form>
-
+    <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+      <input type="email" id="email-input" placeholder="seu@email.com" required>
+      <button type="submit">Quero receber</button>
+    </form>
+    <p id="subscribe-msg" style="font-size:0.8rem;color:var(--gold);margin-top:0.75rem;display:none;">✓ Obrigado! Em breve você receberá o primeiro conteúdo.</p>
   </div>
 </div>
 
@@ -951,12 +957,5 @@
   }
 </script>
 
-</body>
-</html>
-  <!-- rodapé -->
-  <footer>
-    <p>Obrigado pela visita!</p>
-    <img src="https://api.visitorbadge.io/api/combined?path=https://diegobenem.github.io/blog&label=VISITAS&countColor=%23c9a84c" />
-  </footer>
 </body>
 </html>

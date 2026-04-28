@@ -15,812 +15,190 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1a1a2e;
-    --ink2: #3d3d5c;
-    --muted: #8888aa;
-    --bg: #f0ede6;
-    --bg2: #e8e4db;
-    --gold: #c9a84c;
-    --gold-light: #f0d98a;
-    --accent: #2d6a4f;
-    --accent2: #52b788;
-    --cross: #7b3f00;
-    --cross-light: #d4a373;
-    --white: #ffffff;
-    --serif: 'Playfair Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-    --radius: 12px;
-  }
+:root {
+  --ink: #1a1a2e; --ink2: #3d3d5c; --muted: #8888aa;
+  --bg: #f0ede6; --bg2: #e8e4db;
+  --gold: #c9a84c; --gold-light: #f0d98a;
+  --accent: #2d6a4f; --accent2: #52b788;
+  --cross: #7b3f00; --cross-light: #d4a373;
+  --white: #ffffff;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* PROGRESS BAR */
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--accent2)); width: 0%; z-index: 9999; transition: width 0.1s linear; }
 
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav { position: sticky; top: 0; background: rgba(240,237,230,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,26,46,0.08); z-index: 100; padding: 0 2rem; }
+.nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-size: 0.875rem; color: var(--ink2); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--ink) !important; color: var(--white) !important; padding: 8px 18px; border-radius: 8px; font-weight: 500 !important; }
+.nav-cta:hover { background: var(--gold) !important; }
 
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
+/* HERO */
+.hero { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem 3rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; align-items: start; }
+.hero-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; color: var(--ink); margin-bottom: 1.25rem; }
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero-desc { font-size: 1rem; line-height: 1.75; color: var(--ink2); margin-bottom: 2rem; font-weight: 300; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary { background: var(--ink); color: var(--white); padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: background 0.2s, transform 0.15s; display: inline-block; }
+.btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+.btn-secondary { border: 1.5px solid var(--ink2); color: var(--ink2); padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; display: inline-block; }
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ─── PROGRESS BAR ─── */
-  #progress-bar {
-    position: fixed;
-    top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--accent2));
-    width: 0%;
-    z-index: 9999;
-    transition: width 0.1s linear;
-  }
+/* MESSAGE BOX */
+.msg-box { background: var(--white); border-radius: 16px; padding: 1.5rem; box-shadow: 0 16px 48px rgba(26,26,46,0.1); border: 1px solid rgba(26,26,46,0.06); position: relative; overflow: hidden; }
+.msg-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--accent2), var(--gold)); }
+.msg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.msg-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+.msg-counter { font-size: 0.72rem; color: var(--muted); background: var(--bg2); padding: 3px 8px; border-radius: 10px; }
+.msg-body { min-height: 90px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.msg-text { font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--ink2); line-height: 1.7; text-align: center; transition: opacity 0.3s; }
+.msg-text.fade { opacity: 0; }
+.msg-btn { width: 100%; background: linear-gradient(135deg, var(--ink), #2d3a2e); color: var(--white); border: none; padding: 11px; border-radius: 8px; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.msg-btn:hover { background: var(--gold); color: var(--ink); transform: translateY(-1px); }
+.msg-locked { text-align: center; padding: 0.25rem 0; }
+.lock-symbol { font-size: 1.75rem; margin-bottom: 0.5rem; }
+.lock-title { font-family: var(--serif); font-size: 0.95rem; color: var(--ink); margin-bottom: 0.35rem; }
+.lock-sub { font-size: 0.78rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
+.flash-badge { background: linear-gradient(135deg, #c0392b, #e74c3c); color: var(--white); font-size: 0.75rem; font-weight: 500; padding: 5px 12px; border-radius: 20px; display: inline-block; margin-bottom: 0.75rem; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.lock-cta { display: block; background: var(--gold); color: var(--ink); padding: 10px; border-radius: 8px; text-decoration: none; font-size: 0.82rem; font-weight: 500; margin-bottom: 0.5rem; transition: all 0.2s; }
+.lock-cta:hover { background: var(--gold-light); }
+.lock-articles { display: block; background: var(--bg2); color: var(--ink2); padding: 9px; border-radius: 8px; text-decoration: none; font-size: 0.8rem; margin-bottom: 0.5rem; transition: all 0.2s; text-align: center; }
+.lock-articles:hover { background: var(--accent2); color: var(--white); }
+.reset-btn { background: transparent; border: 1px solid var(--bg2); color: var(--muted); font-size: 0.72rem; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-family: var(--sans); transition: all 0.2s; width: 100%; }
+.reset-btn:hover { border-color: var(--muted); color: var(--ink2); }
 
-  /* ─── NAV ─── */
-  nav {
-    position: sticky;
-    top: 0;
-    background: rgba(250,250,247,0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(26,26,46,0.08);
-    z-index: 100;
-    padding: 0 2rem;
-  }
-  .nav-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-  }
-  .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-  .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; align-items: center; gap: 2rem; }
-  .nav-links a {
-    font-size: 0.875rem;
-    color: var(--ink2);
-    text-decoration: none;
-    font-weight: 400;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--ink) !important;
-    color: var(--white) !important;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-weight: 500 !important;
-    transition: background 0.2s, transform 0.15s !important;
-  }
-  .nav-cta:hover { background: var(--gold) !important; transform: translateY(-1px); }
+/* HERO CARD */
+.hero-card { background: var(--white); border-radius: 20px; padding: 1.75rem; box-shadow: 0 20px 60px rgba(26,26,46,0.1); border: 1px solid rgba(26,26,46,0.06); }
+.stat-row { display: flex; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--bg2); }
+.stat { text-align: center; }
+.stat-num { font-family: var(--serif); font-size: 1.9rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 0.2rem; }
+.stat-label { font-size: 0.72rem; color: var(--muted); }
+.mini-article { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px solid var(--bg2); text-decoration: none; color: inherit; transition: opacity 0.2s; }
+.mini-article:last-child { border-bottom: none; }
+.mini-article:hover { opacity: 0.65; }
+.mini-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+.mini-title { font-size: 0.82rem; color: var(--ink2); line-height: 1.4; }
 
-  /* ─── HERO ─── */
-  .hero {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 5rem 2rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .hero-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
-    line-height: 1.15;
-    color: var(--ink);
-    margin-bottom: 1.25rem;
-  }
-  .hero h1 em { color: var(--gold); font-style: italic; }
-  .hero p {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--ink2);
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--ink);
-    color: var(--white);
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
-  .btn-secondary {
-    border: 1.5px solid var(--ink2);
-    color: var(--ink2);
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.2s;
-    display: inline-block;
-  }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+/* ARTICLES SECTION */
+.section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2.5rem; }
+.section-title { font-family: var(--serif); font-size: 1.75rem; color: var(--ink); }
+.section-title span { color: var(--gold); }
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.article-card { background: var(--white); border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; border: 1px solid rgba(26,26,46,0.06); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; }
+.article-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,46,0.1); }
+.article-card.featured { grid-column: 1 / -1; flex-direction: row; }
+.article-thumb { height: 160px; position: relative; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.article-card.featured .article-thumb { width: 320px; height: auto; min-height: 200px; }
+.thumb-circle { position: absolute; width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+.thumb-circle2 { position: absolute; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+.thumb-icon { font-size: 3.5rem; position: relative; z-index: 1; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15)); transition: transform 0.3s; }
+.article-card:hover .thumb-icon { transform: scale(1.1); }
+.article-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.article-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.article-title { font-family: var(--serif); font-size: 1.1rem; color: var(--ink); line-height: 1.35; margin-bottom: 0.75rem; }
+.article-card.featured .article-title { font-size: 1.45rem; }
+.article-excerpt { font-size: 0.875rem; color: var(--ink2); line-height: 1.7; font-weight: 300; flex: 1; margin-bottom: 1rem; }
+.article-meta { display: flex; align-items: center; gap: 0.75rem; font-size: 0.78rem; color: var(--muted); }
+.article-meta span + span::before { content: '·'; margin-right: 0.75rem; }
 
-  .hero-visual {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-card {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 20px 60px rgba(26,26,46,0.1);
-    width: 100%;
-    max-width: 360px;
-    position: relative;
-  }
-  .hero-card::before {
-    content: '';
-    position: absolute;
-    top: -2px; left: -2px; right: -2px; bottom: -2px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, var(--gold-light), transparent, var(--accent2));
-    z-index: -1;
-    opacity: 0.4;
-  }
-  .stat-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--bg2);
-  }
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2rem;
-    color: var(--gold);
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .stat-label { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
-  .mini-article {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--bg2);
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  .mini-article:last-child { border-bottom: none; }
-  .mini-article:hover { opacity: 0.7; }
-  .mini-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent2);
-    flex-shrink: 0;
-  }
-  .mini-title { font-size: 0.82rem; color: var(--ink2); line-height: 1.4; }
+/* DIVIDER */
+.divider { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.divider hr { border: none; border-top: 1px solid rgba(26,26,46,0.08); }
 
-  /* ─── ARTICLES GRID ─── */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-  }
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 2.5rem;
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-size: 1.75rem;
-    color: var(--ink);
-  }
-  .section-title span { color: var(--gold); }
-  .see-all {
-    font-size: 0.85rem;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .see-all:hover { color: var(--gold); }
+/* BONUS SECTION */
+.bonus-section { background: linear-gradient(135deg, #1a1a2e 0%, #2d3a2e 100%); padding: 4rem 2rem; }
+.bonus-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.bonus-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; display: block; }
+.bonus-title { font-family: var(--serif); font-size: clamp(1.75rem, 3.5vw, 2.5rem); color: var(--white); line-height: 1.2; margin-bottom: 0.75rem; }
+.bonus-title em { color: var(--gold-light); font-style: italic; }
+.bonus-desc { font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.75; font-weight: 300; }
+.bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.bonus-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 1.75rem; text-align: left; transition: border-color 0.2s, background 0.2s; }
+.bonus-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(201,168,76,0.4); }
+.bonus-vol { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.5rem; display: block; }
+.bonus-card h3 { font-family: var(--serif); font-size: 1.1rem; color: var(--white); margin-bottom: 0.75rem; line-height: 1.35; }
+.bonus-card p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.65; margin-bottom: 1.25rem; font-weight: 300; }
+.bonus-btn { display: inline-block; background: transparent; border: 1px solid rgba(201,168,76,0.5); color: var(--gold); padding: 9px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.bonus-btn:hover { background: var(--gold); color: var(--ink); }
+.bonus-main-btn { display: inline-block; background: var(--gold); color: var(--ink); padding: 14px 36px; border-radius: 8px; font-size: 1rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.bonus-main-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+.bonus-note { font-size: 0.78rem; color: rgba(255,255,255,0.25); margin-top: 0.75rem; }
 
-  .articles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
+/* CORPO SECTION */
+.corpo-section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+.corpo-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; }
+.corpo-title { font-family: var(--serif); font-size: 1.75rem; color: var(--ink); }
+.corpo-title span { color: var(--accent2); }
 
-  .article-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    border: 1px solid rgba(26,26,46,0.06);
-    transition: transform 0.25s, box-shadow 0.25s;
-    display: flex;
-    flex-direction: column;
-  }
-  .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(26,26,46,0.1);
-  }
-  .article-card.featured {
-    grid-column: 1 / -1;
-    flex-direction: row;
-  }
-  .article-thumb {
-    height: 160px;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .article-card.featured .article-thumb {
-    width: 320px;
-    height: auto;
-    min-height: 200px;
-  }
-  .thumb-pattern { display: none; }
-  .thumb-number { display: none; }
-  .thumb-icon {
-    font-size: 3.5rem;
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-    transition: transform 0.3s;
-  }
-  .article-card:hover .thumb-icon {
-    transform: scale(1.12);
-  }
-  .thumb-circle {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .thumb-circle2 {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .article-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-  .article-tag {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-  .article-title {
-    font-family: var(--serif);
-    font-size: 1.15rem;
-    color: var(--ink);
-    line-height: 1.35;
-    margin-bottom: 0.75rem;
-  }
-  .article-card.featured .article-title { font-size: 1.5rem; }
-  .article-excerpt {
-    font-size: 0.875rem;
-    color: var(--ink2);
-    line-height: 1.7;
-    font-weight: 300;
-    flex: 1;
-    margin-bottom: 1rem;
-  }
-  .article-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
-  .article-meta span + span::before {
-    content: '·';
-    margin-right: 0.75rem;
-  }
+/* CHRISTIAN SECTION */
+.christian-section { background: linear-gradient(180deg, var(--bg) 0%, #1a1a2e 6%, #1a1a2e 100%); padding: 0 0 4rem; margin-top: 2rem; }
+.christian-inner { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem 0; }
+.christian-header { text-align: center; margin-bottom: 3rem; }
+.cross-icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin-bottom: 1.25rem; position: relative; }
+.cross-v { position: absolute; width: 4px; height: 56px; background: var(--cross-light); border-radius: 2px; left: 50%; transform: translateX(-50%); }
+.cross-h { position: absolute; width: 36px; height: 4px; background: var(--cross-light); border-radius: 2px; top: 35%; left: 50%; transform: translateX(-50%); }
+.cross-glow { position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(212,163,115,0.25) 0%, transparent 70%); }
+.christian-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cross-light); margin-bottom: 0.75rem; font-weight: 500; }
+.christian-title { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.75rem); color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+.christian-title em { color: var(--cross-light); font-style: italic; }
+.christian-desc { font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 560px; margin: 0 auto 0.5rem; line-height: 1.75; font-weight: 300; }
+.christian-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+.christian-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,163,115,0.15); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; transition: background 0.25s, border-color 0.25s; cursor: pointer; text-decoration: none; display: block; }
+.christian-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(212,163,115,0.4); }
+.christian-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cross-light), transparent); opacity: 0; transition: opacity 0.25s; }
+.christian-card:hover::after { opacity: 1; }
+.card-verse { font-family: var(--serif); font-size: 0.9rem; color: var(--cross-light); font-style: italic; line-height: 1.6; margin-bottom: 0.5rem; padding-left: 0.75rem; border-left: 2px solid rgba(212,163,115,0.4); }
+.card-ref { font-size: 0.72rem; color: rgba(212,163,115,0.6); margin-bottom: 1rem; display: block; }
+.card-christian-title { font-family: var(--serif); font-size: 1rem; color: var(--white); margin-bottom: 0.5rem; line-height: 1.35; }
+.card-christian-excerpt { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.65; font-weight: 300; }
+.card-arrow { font-size: 0.78rem; color: var(--cross-light); margin-top: 0.75rem; display: block; opacity: 0; transition: opacity 0.2s; }
+.christian-card:hover .card-arrow { opacity: 1; }
 
-  /* ─── DIVIDER ─── */
-  .divider {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-  .divider hr {
-    border: none;
-    border-top: 1px solid rgba(26,26,46,0.08);
-  }
+/* NEWSLETTER */
+.newsletter { background: var(--ink); padding: 4rem 2rem; }
+.newsletter-inner { max-width: 560px; margin: 0 auto; text-align: center; }
+.newsletter h2 { font-family: var(--serif); font-size: 1.75rem; color: var(--white); margin-bottom: 0.75rem; }
+.newsletter h2 em { color: var(--gold); font-style: italic; }
+.newsletter p { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; line-height: 1.7; font-weight: 300; }
 
-  /* ─── CHRISTIAN SECTION ─── */
-  .christian-section {
-    background: linear-gradient(180deg, var(--bg) 0%, #1a1a2e 8%, #1a1a2e 100%);
-    padding: 0 0 4rem;
-    margin-top: 4rem;
-    position: relative;
-  }
-  .christian-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem 0;
-  }
-  .christian-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  .cross-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    margin-bottom: 1.25rem;
-    position: relative;
-  }
-  .cross-v {
-    position: absolute;
-    width: 4px;
-    height: 56px;
-    background: var(--cross-light);
-    border-radius: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .cross-h {
-    position: absolute;
-    width: 36px;
-    height: 4px;
-    background: var(--cross-light);
-    border-radius: 2px;
-    top: 35%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .cross-glow {
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212,163,115,0.25) 0%, transparent 70%);
-  }
-  .christian-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--cross-light);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-  .christian-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  .christian-title em { color: var(--cross-light); font-style: italic; }
-  .christian-desc {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.75;
-    max-width: 560px;
-    margin: 0 auto 0.5rem;
-    font-weight: 300;
-  }
-  .lock-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(212,163,115,0.15);
-    border: 1px solid rgba(212,163,115,0.3);
-    color: var(--cross-light);
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-top: 1rem;
-  }
-  .lock-icon {
-    width: 12px;
-    height: 14px;
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .lock-body {
-    width: 10px;
-    height: 8px;
-    border: 1.5px solid currentColor;
-    border-radius: 2px;
-    margin-top: 4px;
-  }
-  .lock-shackle {
-    width: 6px;
-    height: 5px;
-    border: 1.5px solid currentColor;
-    border-bottom: none;
-    border-radius: 3px 3px 0 0;
-    position: absolute;
-    top: 0;
-  }
+/* FOOTER */
+footer { background: #0f0f1a; padding: 2rem; text-align: center; }
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+.footer-logo { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; }
+.footer-logo span { color: var(--gold); }
+footer p { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+footer a:hover { color: var(--gold); }
 
-  .christian-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.25rem;
-    margin-top: 2.5rem;
-  }
-  .christian-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(212,163,115,0.15);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.25s, border-color 0.25s;
-    cursor: pointer;
-  }
-  .christian-card:hover {
-    background: rgba(255,255,255,0.07);
-    border-color: rgba(212,163,115,0.35);
-  }
-  .christian-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--cross-light), transparent);
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-  .christian-card:hover::after { opacity: 1; }
-  .card-verse {
-    font-family: var(--serif);
-    font-size: 0.9rem;
-    color: var(--cross-light);
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    padding-left: 0.75rem;
-    border-left: 2px solid rgba(212,163,115,0.4);
-  }
-  .card-ref {
-    font-size: 0.72rem;
-    color: rgba(212,163,115,0.6);
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .card-christian-title {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-    line-height: 1.35;
-  }
-  .card-christian-excerpt {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-  .card-lock {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    opacity: 0.4;
-  }
-  .card-lock svg { width: 14px; height: 14px; }
+/* FLOATING CTA */
+#floating-cta { position: fixed; bottom: 2rem; right: 2rem; background: var(--ink); color: var(--white); padding: 12px 20px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 500; box-shadow: 0 8px 32px rgba(26,26,46,0.25); transform: translateY(80px); opacity: 0; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); z-index: 50; display: flex; align-items: center; gap: 8px; }
+#floating-cta.visible { transform: translateY(0); opacity: 1; }
+#floating-cta:hover { background: var(--gold); transform: translateY(-2px); }
+.cta-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
 
-  .christian-cta {
-    text-align: center;
-    margin-top: 3rem;
-  }
-  .btn-christian {
-    background: var(--cross-light);
-    color: var(--cross);
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.2s;
-    display: inline-block;
-    border: none;
-    cursor: pointer;
-  }
-  .btn-christian:hover { background: var(--white); transform: translateY(-2px); }
-  .christian-coming {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.3);
-    margin-top: 0.75rem;
-  }
-
-  /* ─── NEWSLETTER ─── */
-  .newsletter {
-    background: var(--ink);
-    padding: 4rem 2rem;
-  }
-  .newsletter-inner {
-    max-width: 560px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .newsletter h2 {
-    font-family: var(--serif);
-    font-size: 1.75rem;
-    color: var(--white);
-    margin-bottom: 0.75rem;
-  }
-  .newsletter h2 em { color: var(--gold); font-style: italic; }
-  .newsletter p {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-    line-height: 1.7;
-  }
-  .newsletter-form {
-    display: flex;
-    gap: 0.75rem;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-  .newsletter-form input {
-    flex: 1;
-    padding: 12px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.07);
-    color: var(--white);
-    font-family: var(--sans);
-    font-size: 0.875rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
-  .newsletter-form input:focus { border-color: var(--gold); }
-  .newsletter-form button {
-    background: var(--gold);
-    color: var(--ink);
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-family: var(--sans);
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.2s;
-  }
-  .newsletter-form button:hover { background: var(--gold-light); }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: #0f0f1a;
-    padding: 2rem;
-    text-align: center;
-  }
-  .footer-inner { max-width: 1100px; margin: 0 auto; }
-  .footer-logo {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 0.5rem;
-  }
-  .footer-logo span { color: var(--gold); }
-  footer p {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.2);
-  }
-  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
-  footer a:hover { color: var(--gold); }
-
-  /* ─── FLOATING CTA ─── */
-  #floating-cta {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--ink);
-    color: var(--white);
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    box-shadow: 0 8px 32px rgba(26,26,46,0.25);
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  #floating-cta.visible { transform: translateY(0); opacity: 1; }
-  #floating-cta:hover { background: var(--gold); transform: translateY(-2px); }
-  .cta-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent2);
-    flex-shrink: 0;
-  }
-
-  /* ─── MESSAGE BOX ─── */
-  .hero {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-  .msg-box-wrap { display: flex; align-items: flex-start; }
-  .msg-box {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 20px 60px rgba(26,26,46,0.1);
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(26,26,46,0.06);
-  }
-  .msg-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--accent2), var(--gold));
-  }
-  .msg-box-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-  .msg-box-label {
-    font-size: .72rem;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .msg-counter {
-    font-size: .72rem;
-    color: var(--muted);
-    background: var(--bg2);
-    padding: 3px 8px;
-    border-radius: 10px;
-  }
-  .msg-content {
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  .msg-text {
-    font-family: var(--serif);
-    font-size: .95rem;
-    font-style: italic;
-    color: var(--ink2);
-    line-height: 1.7;
-    text-align: center;
-    transition: opacity .3s;
-  }
-  .msg-text.fade { opacity: 0; }
-  .msg-btn {
-    width: 100%;
-    background: linear-gradient(135deg, var(--ink), #2d3a2e);
-    color: var(--white);
-    border: none;
-    padding: 11px;
-    border-radius: 8px;
-    font-family: var(--sans);
-    font-size: .85rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .2s;
-    letter-spacing: .02em;
-  }
-  .msg-btn:hover { background: var(--gold); color: var(--ink); transform: translateY(-1px); }
-  .msg-locked { text-align: center; padding: .5rem 0; }
-  .lock-symbol { font-size: 2rem; margin-bottom: .75rem; }
-  .lock-title { font-family: var(--serif); font-size: 1rem; color: var(--ink); margin-bottom: .4rem; }
-  .lock-sub { font-size: .8rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-  .flash-badge {
-    background: linear-gradient(135deg, #c0392b, #e74c3c);
-    color: var(--white);
-    font-size: .78rem;
-    font-weight: 500;
-    padding: 6px 14px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 1rem;
-    animation: pulse 1.5s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.7} }
-  .lock-cta {
-    display: block;
-    background: var(--gold);
-    color: var(--ink);
-    padding: 11px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: .85rem;
-    font-weight: 500;
-    margin-bottom: .75rem;
-    transition: all .2s;
-  }
-  .lock-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .lock-read {
-    display: block;
-    background: transparent;
-    border: 1px solid rgba(26,26,46,.15);
-    color: var(--ink2);
-    padding: 9px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: .82rem;
-    font-weight: 500;
-    margin-bottom: .75rem;
-    transition: all .2s;
-    text-align: center;
-  }
-  .lock-read:hover { background: var(--bg2); color: var(--ink); }
-  .reset-btn {
-    background: transparent;
-    border: 1px solid var(--bg2);
-    color: var(--muted);
-    font-size: .75rem;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: var(--sans);
-    transition: all .2s;
-  }
-  .reset-btn:hover { border-color: var(--muted); color: var(--ink2); }
-
-  /* OVERRIDE hero grid for 3 cols */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .msg-box-wrap { order: -1; }
-    .hero-visual { display: none; }
-  }
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-card { display: none; }
+}
+@media (max-width: 600px) {
+  .article-card.featured { flex-direction: column; }
+  .article-card.featured .article-thumb { width: 100%; min-height: 160px; }
+  .nav-links { display: none; }
+}
 </style>
 </head>
 <body>
@@ -834,7 +212,7 @@
     <div class="nav-links">
       <a href="#artigos">Artigos</a>
       <a href="#fe-crista">Fé & Mente</a>
-      <a href="https://pay.hotmart.com/S98384347S" target="_blank" class="nav-cta">Adquirir Ebook →</a>
+      <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="nav-cta">Adquirir Ebook →</a>
     </div>
   </div>
 </nav>
@@ -844,300 +222,186 @@
   <div class="hero-text">
     <p class="hero-label">Desenvolvimento Pessoal · Autoconhecimento</p>
     <h1>Desperte o potencial que já existe <em>dentro de você</em></h1>
-    <p>Artigos práticos, exercícios e reflexões para reprogramar sua mente, fortalecer seus hábitos e construir a melhor versão de si mesmo — um degrau de cada vez.</p>
+    <p class="hero-desc">Artigos práticos, exercícios e reflexões para reprogramar sua mente, fortalecer seus hábitos e construir a melhor versão de si mesmo.</p>
     <div class="hero-btns">
       <a href="#artigos" class="btn-primary">Ler os artigos</a>
-      <a href="https://pay.hotmart.com/S98384347S" target="_blank" class="btn-secondary">Ver o Ebook</a>
+      <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="btn-secondary">Ver os Ebooks</a>
     </div>
   </div>
 
-  <!-- CAIXA DE MENSAGEM -->
-  <div class="msg-box-wrap">
-    <div class="msg-box" id="msgBox">
-      <div class="msg-box-header">
-        <span class="msg-box-label">✨ Mensagem do Dia</span>
-        <span class="msg-counter" id="msgCounter">1 de 5</span>
-      </div>
-      <div class="msg-content" id="msgContent">
-        <p class="msg-text" id="msgText">Clique para receber sua mensagem de hoje...</p>
-      </div>
-      <button class="msg-btn" id="msgBtn" onclick="nextMessage()">Revelar mensagem ✦</button>
-
-      <!-- BLOQUEIO -->
-      <div class="msg-locked" id="msgLocked" style="display:none;">
-        <div class="lock-symbol">🔒</div>
-        <p class="lock-title">Você chegou ao limite de hoje!</p>
-        <p class="lock-sub">Volte amanhã para 5 novas mensagens — ou aproveite a oferta relâmpago e leve a jornada completa.</p>
-        <div class="flash-badge" id="flashBadge">
-          🔥 Oferta Relâmpago · <span id="timer">10:00</span>
-        </div>
-        <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="lock-cta">Quero a coleção completa →</a>
-        <a href="#artigos" class="lock-read">📖 Continuar lendo os artigos gratuitos</a>
-        <button class="reset-btn" onclick="resetMessages()">↩ Recomeçar agora (5 novas mensagens)</button>
-      </div>
+  <!-- CAIXA MENSAGEM DO DIA -->
+  <div class="msg-box" id="msgBox">
+    <div class="msg-header">
+      <span class="msg-label">✨ Mensagem do Dia</span>
+      <span class="msg-counter" id="msgCounter">1 de 5</span>
+    </div>
+    <div class="msg-body" id="msgBody">
+      <p class="msg-text" id="msgText">Toque para receber sua mensagem de hoje...</p>
+    </div>
+    <button class="msg-btn" id="msgBtn" onclick="nextMessage()">Revelar mensagem ✦</button>
+    <div id="msgLocked" style="display:none;">
+      <div class="lock-symbol">🔒</div>
+      <p class="lock-title">Limite gratuito atingido!</p>
+      <p class="lock-sub">Continue sua jornada com a coleção completa — ou leia os artigos gratuitos abaixo.</p>
+      <div class="flash-badge">🔥 Oferta Relâmpago · <span id="timer">10:00</span></div>
+      <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="lock-cta">Quero a coleção completa →</a>
+      <a href="#artigos" class="lock-articles">📖 Ler artigos gratuitos</a>
+      <button class="reset-btn" onclick="resetMessages()">↺ Novas 5 mensagens</button>
     </div>
   </div>
 
-  <div class="hero-visual">
-    <div class="hero-card">
-      <div class="stat-row">
-        <div class="stat">
-          <span class="stat-num">72</span>
-          <span class="stat-label">Degraus</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">30</span>
-          <span class="stat-label">Dias</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">3</span>
-          <span class="stat-label">Volumes</span>
-        </div>
-      </div>
-      <a href="artigos/reprogramar-a-mente.html" class="mini-article" style="text-decoration:none;color:inherit;">
-        <div class="mini-dot"></div>
-        <span class="mini-title">Como reprogramar a mente em 30 dias</span>
-      </a>
-      <a href="artigos/habitos-mentais.html" class="mini-article" style="text-decoration:none;color:inherit;">
-        <div class="mini-dot" style="background:var(--gold)"></div>
-        <span class="mini-title">5 hábitos que transformam sua mentalidade</span>
-      </a>
-      <a href="artigos/fe-e-autoconhecimento.html" class="mini-article" style="text-decoration:none;color:inherit;">
-        <div class="mini-dot" style="background:var(--cross-light)"></div>
-        <span class="mini-title">Fé e autoconhecimento: o caminho interior</span>
-      </a>
+  <!-- CARD STATS -->
+  <div class="hero-card">
+    <div class="stat-row">
+      <div class="stat"><span class="stat-num">72</span><span class="stat-label">Degraus</span></div>
+      <div class="stat"><span class="stat-num">30</span><span class="stat-label">Dias</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label">Volumes</span></div>
     </div>
+    <a href="artigos/reprogramar-a-mente.html" class="mini-article">
+      <div class="mini-dot"></div>
+      <span class="mini-title">Como reprogramar a mente em 30 dias</span>
+    </a>
+    <a href="artigos/habitos-mentais.html" class="mini-article">
+      <div class="mini-dot" style="background:var(--gold)"></div>
+      <span class="mini-title">5 hábitos que transformam sua mentalidade</span>
+    </a>
+    <a href="artigos/fe-e-autoconhecimento.html" class="mini-article">
+      <div class="mini-dot" style="background:var(--cross-light)"></div>
+      <span class="mini-title">Fé e autoconhecimento: o caminho interior</span>
+    </a>
   </div>
 </section>
 
-<!-- ARTICLES -->
+<!-- ARTIGOS -->
 <section class="section" id="artigos">
   <div class="section-header">
     <h2 class="section-title">Artigos <span>em destaque</span></h2>
-    <a href="#artigos" class="see-all">Ver todos →</a>
   </div>
-
   <div class="articles-grid">
 
-    <!-- FEATURED -->
     <a href="artigos/reprogramar-a-mente.html" class="article-card featured">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #1a1a2e, #2d6a4f);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
+      <div class="article-thumb" style="background:linear-gradient(135deg,#1a1a2e,#2d6a4f);">
+        <div class="thumb-circle2"></div><div class="thumb-circle"></div>
         <div class="thumb-icon">🧠</div>
       </div>
       <div class="article-body">
         <p class="article-tag">Reprogramação Mental</p>
         <h3 class="article-title">Como Reprogramar a Mente em 30 Dias: O Guia Prático Completo</h3>
-        <p class="article-excerpt">Sua mente é um sistema operacional — e ele pode ser atualizado. Descubra como aplicar os princípios da neuroplasticidade para criar novos padrões de pensamento, eliminar crenças limitantes e construir uma mentalidade de crescimento passo a passo.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>8 min de leitura</span>
-          <span>Desenvolvimento Pessoal</span>
-        </div>
+        <p class="article-excerpt">Sua mente é um sistema operacional — e ele pode ser atualizado. Descubra como aplicar os princípios da neuroplasticidade para criar novos padrões de pensamento e eliminar crenças limitantes.</p>
+        <div class="article-meta"><span>Diego Benem</span><span>8 min de leitura</span></div>
       </div>
     </a>
 
-    <!-- CARD 2 -->
     <a href="artigos/habitos-mentais.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #3d3d5c, #c9a84c);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
+      <div class="article-thumb" style="background:linear-gradient(135deg,#3d3d5c,#c9a84c);">
+        <div class="thumb-circle2"></div><div class="thumb-circle"></div>
         <div class="thumb-icon">⚡</div>
       </div>
       <div class="article-body">
         <p class="article-tag">Hábitos</p>
         <h3 class="article-title">5 Hábitos Mentais que Separam Quem Evolui de Quem Estagna</h3>
-        <p class="article-excerpt">Pequenas decisões diárias constroem — ou destroem — quem você se torna. Aprenda os 5 hábitos que as pessoas em constante crescimento praticam sem perceber.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>5 min de leitura</span>
-        </div>
+        <p class="article-excerpt">Pequenas decisões diárias constroem ou destroem quem você se torna. Aprenda os 5 hábitos que as pessoas em constante crescimento praticam.</p>
+        <div class="article-meta"><span>Diego Benem</span><span>5 min de leitura</span></div>
       </div>
     </a>
 
-    <!-- CARD 3 -->
     <a href="artigos/autoconhecimento.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #2d4a3e, #52b788);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
+      <div class="article-thumb" style="background:linear-gradient(135deg,#2d4a3e,#52b788);">
+        <div class="thumb-circle2"></div><div class="thumb-circle"></div>
         <div class="thumb-icon">🌿</div>
       </div>
       <div class="article-body">
         <p class="article-tag">Autoconhecimento</p>
         <h3 class="article-title">Autoconhecimento na Prática: 3 Exercícios para Começar Hoje</h3>
-        <p class="article-excerpt">Não precisamos de anos de terapia para começar a nos conhecer melhor. Três exercícios simples que você pode fazer agora mesmo — em menos de 20 minutos.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>4 min de leitura</span>
-        </div>
+        <p class="article-excerpt">Não precisamos de anos de terapia para começar a nos conhecer melhor. Três exercícios simples que você pode fazer agora mesmo.</p>
+        <div class="article-meta"><span>Diego Benem</span><span>4 min de leitura</span></div>
       </div>
     </a>
 
-    <!-- CARD 4 -->
     <a href="artigos/mindset-crescimento.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #4a1a0c, #d85a30);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
+      <div class="article-thumb" style="background:linear-gradient(135deg,#4a1a0c,#d85a30);">
+        <div class="thumb-circle2"></div><div class="thumb-circle"></div>
         <div class="thumb-icon">🔥</div>
       </div>
       <div class="article-body">
         <p class="article-tag">Mindset</p>
         <h3 class="article-title">Mindset de Crescimento: Por Que Algumas Pessoas Nunca Param de Evoluir</h3>
-        <p class="article-excerpt">A diferença entre quem cresce e quem fica parado não é talento nem sorte — é uma forma específica de enxergar os desafios. Descubra como desenvolver esse olhar.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>6 min de leitura</span>
-        </div>
+        <p class="article-excerpt">A diferença entre quem cresce e quem fica parado não é talento nem sorte — é uma forma específica de enxergar os desafios.</p>
+        <div class="article-meta"><span>Diego Benem</span><span>6 min de leitura</span></div>
       </div>
     </a>
 
-    <!-- CARD CRISTÃO -->
     <a href="artigos/fe-e-autoconhecimento.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #2a1a0e, #7b3f00);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
+      <div class="article-thumb" style="background:linear-gradient(135deg,#2a1a0e,#7b3f00);">
+        <div class="thumb-circle2"></div><div class="thumb-circle"></div>
         <div class="thumb-icon">✝️</div>
       </div>
       <div class="article-body">
         <p class="article-tag" style="color:#c9843c;">Fé & Autoconhecimento</p>
         <h3 class="article-title">Fé e Autoconhecimento: Como a Espiritualidade Transforma o Interior</h3>
-        <p class="article-excerpt">Quando a jornada de autoconhecimento encontra a fé, algo poderoso acontece. Descubra como a espiritualidade cristã aprofunda e transforma o crescimento interior.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>6 min de leitura</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- CARD AGOSTINHO -->
-    <a href="artigos/agostinho-interior.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #1a0a2e, #4a2060);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
-        <div class="thumb-icon">📜</div>
-      </div>
-      <div class="article-body">
-        <p class="article-tag" style="color:#9b6fc4;">Filosofia Cristã</p>
-        <h3 class="article-title">Santo Agostinho e o Homem que se Perdeu para se Encontrar</h3>
-        <p class="article-excerpt">O que um filósofo do século IV tem a dizer para o homem moderno? Muito mais do que você imagina. A jornada de Agostinho é o espelho mais honesto da alma humana.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>7 min de leitura</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- CARD ESPIRITUALIDADE -->
-    <a href="artigos/silencio-interior.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #0a1a2e, #1a4060);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
-        <div class="thumb-icon">🕊️</div>
-      </div>
-      <div class="article-body">
-        <p class="article-tag" style="color:#6aadcf;">Espiritualidade</p>
-        <h3 class="article-title">O Silêncio que Transforma: A Arte de Ouvir a Própria Alma</h3>
-        <p class="article-excerpt">Em um mundo de ruído constante, o silêncio interior se tornou o ato mais revolucionário que existe. Descubra como cultivá-lo e o que ele revela.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>5 min de leitura</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- CARD PROPÓSITO -->
-    <a href="artigos/proposito-espiritualidade.html" class="article-card">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #1a2a0e, #3a6020);">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
-        <div class="thumb-icon">🌟</div>
-      </div>
-      <div class="article-body">
-        <p class="article-tag" style="color:#7ab854;">Propósito & Fé</p>
-        <h3 class="article-title">Viktor Frankl, C.S. Lewis e o Sentido da Vida: O que a Filosofia Cristã Ensina sobre Propósito</h3>
-        <p class="article-excerpt">Dois pensadores, dois séculos diferentes, uma mesma descoberta: a vida sem propósito é um vazio que nenhuma conquista preenche. E a fé tem muito a dizer sobre isso.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>8 min de leitura</span>
-        </div>
+        <p class="article-excerpt">Quando a jornada de autoconhecimento encontra a fé, algo poderoso acontece. Três práticas espirituais que aprofundam quem você é.</p>
+        <div class="article-meta"><span>Diego Benem</span><span>6 min de leitura</span></div>
       </div>
     </a>
 
   </div>
 </section>
 
-<!-- DIVIDER CORPO & SAÚDE -->
-<div style="max-width:1100px;margin:0 auto;padding:0 2rem;">
-  <hr style="border:none;border-top:1px solid rgba(26,26,46,0.08);">
-</div>
+<div class="divider"><hr></div>
 
-<!-- CORPO & SAÚDE -->
-<section class="section" id="corpo-saude" style="padding-top:3rem;">
-  <div class="section-header">
-    <h2 class="section-title">Corpo & <span>Movimento</span></h2>
+<!-- CORPO & MOVIMENTO -->
+<section class="corpo-section" id="corpo">
+  <div class="corpo-header">
+    <h2 class="corpo-title">Corpo & <span>Movimento</span></h2>
   </div>
   <div class="articles-grid">
     <a href="artigos/alongamento-mobilidade.html" class="article-card featured">
-      <div class="article-thumb" style="background: linear-gradient(135deg, #0d3b2e, #1a7a5e); min-height:200px; width:320px;">
-        <div class="thumb-circle2"></div>
-        <div class="thumb-circle"></div>
+      <div class="article-thumb" style="background:linear-gradient(135deg,#0d3b2e,#1a7a5e);width:320px;min-height:200px;">
+        <div class="thumb-circle2"></div><div class="thumb-circle"></div>
         <div class="thumb-icon">🧘</div>
       </div>
       <div class="article-body">
         <p class="article-tag" style="color:#1a7a5e;">Corpo & Saúde</p>
         <h3 class="article-title">O Método do Movimento: Como Alongamento, Mobilidade e Exercício Transformam Corpo e Mente</h3>
         <p class="article-excerpt">Um guia prático de 30 dias para preparar o corpo com alongamento diário, desenvolver mobilidade articular e construir força de forma gradual — sem lesões, sem pressa, com resultados reais.</p>
-        <div class="article-meta">
-          <span>Diego Benem</span>
-          <span>10 min de leitura</span>
-          <span>Saúde & Movimento</span>
-        </div>
+        <div class="article-meta"><span>Diego Benem</span><span>10 min de leitura</span></div>
       </div>
     </a>
   </div>
 </section>
 
 <!-- BONUS EBOOKS -->
-<section style="background:linear-gradient(135deg,#1a1a2e 0%,#2d3a2e 100%);padding:4rem 2rem;margin:0;">
-  <div style="max-width:1100px;margin:0 auto;text-align:center;">
-    <p style="font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;">Bônus Exclusivo</p>
-    <h2 style="font-family:var(--serif);font-size:clamp(1.75rem,3.5vw,2.5rem);color:var(--white);line-height:1.2;margin-bottom:.75rem;">A Coleção Completa <em style="color:var(--gold-light);font-style:italic;">72 Degraus</em></h2>
-    <p style="font-size:1rem;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;font-weight:300;">Três volumes que se complementam — uma jornada completa de transformação interior, do autoconhecimento à consciência plena.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem;">
-
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:1.75rem;text-align:left;transition:border-color .2s;">
-        <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.5rem;">Volume 1</p>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--white);margin-bottom:.75rem;line-height:1.35;">72 Degraus da Mente Consciencial</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:1.25rem;font-weight:300;">A fundação. 72 práticas e reflexões para despertar a consciência e reprogramar os padrões mentais limitantes.</p>
-        <a href="https://pay.hotmart.com/Y96500007E?bid=1777228430403" target="_blank" style="display:inline-block;background:transparent;border:1px solid rgba(201,168,76,.5);color:var(--gold);padding:9px 20px;border-radius:8px;font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s;">Adquirir Vol. 1 →</a>
+<div class="bonus-section">
+  <div class="bonus-inner">
+    <span class="bonus-label">Coleção Completa</span>
+    <h2 class="bonus-title">A Trilogia <em>72 Degraus</em></h2>
+    <p class="bonus-desc">Três volumes que se complementam — uma jornada completa de transformação interior, do autoconhecimento à consciência plena.</p>
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <span class="bonus-vol">Volume 1</span>
+        <h3>72 Degraus da Mente Consciencial</h3>
+        <p>A fundação. 72 práticas e reflexões para despertar a consciência e reprogramar padrões mentais limitantes.</p>
+        <a href="https://pay.hotmart.com/Y96500007E?bid=1777228430403" target="_blank" class="bonus-btn">Adquirir Vol. 1 →</a>
       </div>
-
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:1.75rem;text-align:left;">
-        <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.5rem;">Volume 2</p>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--white);margin-bottom:.75rem;line-height:1.35;">72 Degraus — Aprofundamento</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:1.25rem;font-weight:300;">A expansão. Aprofunda e amplia os conceitos do primeiro volume, levando a jornada interior a um novo nível.</p>
-        <a href="https://pay.hotmart.com/L97270806K?bid=1777228471361" target="_blank" style="display:inline-block;background:transparent;border:1px solid rgba(201,168,76,.5);color:var(--gold);padding:9px 20px;border-radius:8px;font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s;">Adquirir Vol. 2 →</a>
+      <div class="bonus-card">
+        <span class="bonus-vol">Volume 2</span>
+        <h3>72 Degraus — Aprofundamento</h3>
+        <p>A expansão. Aprofunda e amplia os conceitos do primeiro volume, levando a jornada interior a um novo nível.</p>
+        <a href="https://pay.hotmart.com/L97270806K?bid=1777228471361" target="_blank" class="bonus-btn">Adquirir Vol. 2 →</a>
       </div>
-
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:1.75rem;text-align:left;">
-        <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.5rem;">Volume 3</p>
-        <h3 style="font-family:var(--serif);font-size:1.15rem;color:var(--white);margin-bottom:.75rem;line-height:1.35;">O Poder da Nova Consciência</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:1.25rem;font-weight:300;">A síntese. Une tudo em um método prático para viver com consciência plena e propósito genuíno no dia a dia.</p>
-        <a href="https://pay.hotmart.com/S98384347S?bid=1777228496546" target="_blank" style="display:inline-block;background:transparent;border:1px solid rgba(201,168,76,.5);color:var(--gold);padding:9px 20px;border-radius:8px;font-size:.82rem;font-weight:500;text-decoration:none;transition:all .2s;">Adquirir Vol. 3 →</a>
+      <div class="bonus-card">
+        <span class="bonus-vol">Volume 3</span>
+        <h3>O Poder da Nova Consciência</h3>
+        <p>A síntese. Une tudo em um método prático para viver com consciência plena e propósito genuíno no dia a dia.</p>
+        <a href="https://pay.hotmart.com/S98384347S?bid=1777228496546" target="_blank" class="bonus-btn">Adquirir Vol. 3 →</a>
       </div>
-
     </div>
-
-    <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" style="display:inline-block;background:var(--gold);color:var(--ink);padding:14px 36px;border-radius:8px;font-size:1rem;font-weight:500;text-decoration:none;transition:all .2s;margin-top:.5rem;">Ver Coleção Completa →</a>
-    <p style="font-size:.78rem;color:rgba(255,255,255,.25);margin-top:.75rem;">Acesso imediato após a compra · Garantia de satisfação</p>
+    <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="bonus-main-btn">Ver Coleção Completa →</a>
+    <p class="bonus-note">Acesso imediato após a compra · Garantia de satisfação</p>
   </div>
-</section>
+</div>
 
-<div class="divider"><hr></div>
-
-<!-- CHRISTIAN SECTION -->
+<!-- ÁREA CRISTÃ -->
 <section class="christian-section" id="fe-crista">
   <div class="christian-inner">
     <div class="christian-header">
@@ -1148,65 +412,43 @@
       </div>
       <p class="christian-label">Área Especial</p>
       <h2 class="christian-title">Desenvolvimento Pessoal <em>Cristão</em></h2>
-      <p class="christian-desc">Uma jornada de autoconhecimento enraizada na fé. Reflexões, estudos e práticas que unem a sabedoria das Escrituras com o crescimento interior.</p>
-      <div class="lock-badge">
-        <span class="lock-icon">
-          <span class="lock-shackle"></span>
-          <span class="lock-body"></span>
-        </span>
-        Conteúdo exclusivo — em breve
-      </div>
+      <p class="christian-desc">Uma jornada de autoconhecimento enraizada na fé. Reflexões, filosofia cristã e práticas que unem a sabedoria das Escrituras com o crescimento interior.</p>
     </div>
 
     <div class="christian-grid">
 
-      <div class="christian-card" onclick="window.location='artigos/filosofos-cristaos-autoconhecimento.html'">
-        <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+      <a href="artigos/filosofos-cristaos-autoconhecimento.html" class="christian-card">
         <p class="card-verse">"Nosso coração está inquieto até que descanse em Ti."</p>
         <span class="card-ref">Santo Agostinho — Confissões</span>
         <h4 class="card-christian-title">O que os Grandes Filósofos Cristãos Sabiam Sobre Autoconhecimento</h4>
         <p class="card-christian-excerpt">Agostinho, Pascal, Tomás de Aquino e C.S. Lewis chegaram a profundidades que a psicologia moderna ainda tenta alcançar.</p>
-      </div>
+        <span class="card-arrow">Ler artigo →</span>
+      </a>
 
-      <div class="christian-card" onclick="window.location='artigos/proposito-e-chamado-espiritual.html'">
-        <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+      <a href="artigos/proposito-e-chamado-espiritual.html" class="christian-card">
         <p class="card-verse">"Antes de te formar no ventre materno, eu te conheci."</p>
         <span class="card-ref">Jeremias 1:5</span>
         <h4 class="card-christian-title">Propósito e Chamado: Como a Espiritualidade Revela Quem Você Veio Ser</h4>
         <p class="card-christian-excerpt">Você não inventa seu propósito — você o descobre. Um guia prático e espiritual para encontrar seu chamado.</p>
-      </div>
+        <span class="card-arrow">Ler artigo →</span>
+      </a>
 
-      <div class="christian-card" onclick="window.location='artigos/fe-e-crencas-limitantes.html'">
-        <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+      <a href="artigos/fe-e-crencas-limitantes.html" class="christian-card">
         <p class="card-verse">"Transformai-vos pela renovação da vossa mente."</p>
         <span class="card-ref">Romanos 12:2</span>
         <h4 class="card-christian-title">A Mente Liberta: Como a Fé Quebra as Correntes das Crenças Limitantes</h4>
         <p class="card-christian-excerpt">Crenças limitantes são grades invisíveis. A fé oferece algo que vai além de qualquer técnica: uma nova identidade.</p>
-      </div>
+        <span class="card-arrow">Ler artigo →</span>
+      </a>
 
-      <div class="christian-card" onclick="window.location='artigos/fe-e-autoconhecimento.html'">
-        <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+      <a href="artigos/fe-e-autoconhecimento.html" class="christian-card">
         <p class="card-verse">"Examina-me, ó Deus, e conhece o meu coração."</p>
         <span class="card-ref">Salmos 139:23</span>
         <h4 class="card-christian-title">Fé e Autoconhecimento: Como a Espiritualidade Transforma o Interior</h4>
-        <p class="card-christian-excerpt">Quando a jornada de autoconhecimento encontra a fé, algo poderoso acontece. Três práticas espirituais que aprofundam quem você é.</p>
-      </div>
+        <p class="card-christian-excerpt">Quando a jornada de autoconhecimento encontra a fé, algo poderoso acontece. Três práticas espirituais que transformam.</p>
+        <span class="card-arrow">Ler artigo →</span>
+      </a>
 
-    </div>
-
-    <div class="christian-cta">
-      <button class="btn-christian" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
-        Quero ser avisado quando abrir →
-      </button>
-      <p class="christian-coming">Área exclusiva em desenvolvimento. Entre na lista de espera.</p>
     </div>
   </div>
 </section>
@@ -1215,8 +457,8 @@
 <div class="newsletter">
   <div class="newsletter-inner">
     <h2>Receba conteúdo <em>gratuito</em> toda semana</h2>
-    <p>Entre na lista e receba artigos, exercícios práticos e reflexões sobre desenvolvimento pessoal diretamente no seu e-mail — sem spam, sem enrolação.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdXYvy8iZjydBNGpWYb1svjlH8oOCpqk3nppdtJB0-iM7PfQ/viewform?usp=publish-editor" target="_blank" style="display:inline-block;background:var(--gold);color:var(--ink);padding:14px 32px;border-radius:8px;font-size:0.95rem;font-weight:500;text-decoration:none;transition:background 0.2s;">Quero receber conteúdo gratuito →</a>
+    <p>Entre na lista e receba artigos, exercícios práticos e reflexões sobre desenvolvimento pessoal diretamente no seu e-mail.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdXYvy8iZjydBNGpWYb1svjlH8oOCpqk3nppdtJB0-iM7PfQ/viewform" target="_blank" style="display:inline-block;background:var(--gold);color:var(--ink);padding:14px 32px;border-radius:8px;font-size:0.95rem;font-weight:500;text-decoration:none;transition:background 0.2s;">Quero receber conteúdo gratuito →</a>
     <p style="font-size:0.8rem;color:rgba(255,255,255,0.3);margin-top:0.75rem;">Você será redirecionado para um formulário seguro do Google</p>
   </div>
 </div>
@@ -1225,476 +467,237 @@
 <footer>
   <div class="footer-inner">
     <p class="footer-logo">Nova <span>Consciência</span></p>
-    <p>© 2025 Diego Benem Salvá · <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank">Adquirir os Ebooks</a> · <a href="mailto:diegochimrs@hotmail.com">Contato</a></p>
+    <p>© 2025 Diego Benem Salvá · <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank">Adquirir os Ebooks</a> · <a href="mailto:diegobenem@gmail.com">Contato</a></p>
   </div>
 </footer>
 
 <!-- FLOATING CTA -->
-<a href="https://pay.hotmart.com/S98384347S" target="_blank" id="floating-cta">
+<a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" id="floating-cta">
   <span class="cta-dot"></span>
-  Adquirir o Ebook
+  Adquirir os Ebooks
 </a>
 
 <script>
-  // ─── PROGRESS BAR & FLOATING CTA ───
-  const bar = document.getElementById('progress-bar');
-  const floatingCta = document.getElementById('floating-cta');
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const total = document.body.scrollHeight - window.innerHeight;
-    bar.style.width = Math.round((scrolled / total) * 100) + '%';
-    if (scrolled > 400) floatingCta.classList.add('visible');
-    else floatingCta.classList.remove('visible');
-  });
+// PROGRESS BAR & FLOATING CTA
+const bar = document.getElementById('progress-bar');
+const fc = document.getElementById('floating-cta');
+window.addEventListener('scroll', () => {
+  const s = window.scrollY, t = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = Math.round(s / t * 100) + '%';
+  fc.classList.toggle('visible', s > 400);
+});
 
-  // ─── MENSAGENS ───
-  const mensagens = [
-    "Você é capaz de muito mais do que imagina. O primeiro passo é acreditar nisso.",
-    "Cada manhã é uma nova oportunidade de se tornar quem você quer ser.",
-    "A mudança que você busca lá fora começa dentro de você.",
-    "Seus pensamentos moldam sua realidade. Escolha-os com sabedoria.",
-    "O crescimento começa exatamente onde o conforto termina.",
-    "Você não precisa ser perfeito para começar. Comece e vá melhorando.",
-    "A disciplina de hoje é a liberdade de amanhã.",
-    "Pequenas ações consistentes criam grandes transformações.",
-    "Confie no processo. Os resultados chegam para quem persiste.",
-    "Sua mente é um jardim. Plante pensamentos que florescem.",
-    "O passado não define o futuro — suas escolhas de hoje definem.",
-    "Quem controla seus pensamentos controla sua vida.",
-    "Seja grato pelo que tem enquanto trabalha pelo que quer.",
-    "A coragem não é ausência de medo — é agir apesar dele.",
-    "Você é o resultado de tudo que escolheu pensar e fazer.",
-    "Cada obstáculo é um convite para crescer além dos seus limites.",
-    "A paz interior começa quando você para de lutar contra o que é.",
-    "Invista tempo em você — é o melhor investimento possível.",
-    "Sua história não acabou. O melhor capítulo ainda está por vir.",
-    "Autoconhecimento é a base de toda transformação real.",
-    "O que você faz hoje determina quem você será amanhã.",
-    "Grandes mudanças começam com uma pequena decisão corajosa.",
-    "Você tem força suficiente para superar qualquer desafio.",
-    "A vida recompensa quem age com intenção e consistência.",
-    "Seja a versão de você que o seu eu de 5 anos atrás precisava ver.",
-    "O silêncio interior é onde a sabedoria verdadeira habita.",
-    "Não compare sua jornada com a de ninguém. A sua é única.",
-    "Cada dia é uma folha em branco. Escreva algo que valha a pena.",
-    "A mente que se abre para uma nova ideia nunca volta ao tamanho original.",
-    "Seus limites existem apenas onde você acredita que existem.",
-    "A gratidão transforma o que temos em suficiente.",
-    "Foco não é fazer muitas coisas — é fazer as coisas certas.",
-    "O hábito que você constrói hoje constrói quem você será.",
-    "Você merece a vida que está sonhando. Agora vá buscá-la.",
-    "A sua energia vai para onde sua atenção está. Direcione-a bem.",
-    "Resistir à mudança é resistir ao crescimento.",
-    "O que você pensa sobre si mesmo é o que o mundo acreditará.",
-    "Seja paciente com o processo. As raízes crescem antes das flores.",
-    "A persistência transforma o impossível em inevitável.",
-    "Cuide da sua mente como cuida do seu corpo. Ela merece isso.",
-    "Cada desafio vencido expande o que você acredita ser capaz.",
-    "O sucesso é construído num momento de cada vez.",
-    "Não espere a motivação — construa a disciplina.",
-    "Você já superou 100% dos seus dias difíceis até agora.",
-    "A clareza mental começa com silêncio e autoobservação.",
-    "Escolha pensar grandes pensamentos. A mente cresce com eles.",
-    "O amor próprio não é vaidade — é necessidade.",
-    "Quando você muda a forma de ver as coisas, as coisas mudam.",
-    "A jornada de mil milhas começa com um único passo.",
-    "Você é mais resiliente do que acredita ser.",
-    "A ação imperfeita supera sempre a perfeição paralisante.",
-    "Cuide da sua paz como cuida das suas conquistas.",
-    "O que você tolera é o que você aceita. Eleve seus padrões.",
-    "Transformação não é um evento — é uma prática diária.",
-    "Você tem tudo que precisa para começar. Comece.",
-    "A mente treinada encontra oportunidade onde outros veem obstáculo.",
-    "Sua voz interior importa. Aprenda a escutá-la.",
-    "Crescer dói. Estagnar dói mais.",
-    "O agora é o único momento em que a vida realmente acontece.",
-    "Quem planta autoconhecimento colhe sabedoria.",
-    "Você é o arquiteto da sua própria consciência.",
-    "A mudança que você adia hoje é o arrependimento de amanhã.",
-    "Confie na sua intuição — ela conhece o caminho.",
-    "O equilíbrio não é encontrado — é construído todos os dias.",
-    "Seu potencial é maior do que qualquer dificuldade que enfrenta.",
-    "A mente em paz conquista mais do que a mente em guerra.",
-    "Escolha crescer mesmo quando é mais fácil ficar parado.",
-    "Você não falhou — você aprendeu. Há diferença enorme aí.",
-    "A autoconfiança é construída fazendo o que você teme.",
-    "Cada respiração consciente é um ato de presença e poder.",
-    "Não se julgue pelo que ainda não é. Valorize quem já se tornou.",
-    "O cuidado com a mente é o maior ato de amor próprio.",
-    "Quem conhece a si mesmo tem vantagem em qualquer situação.",
-    "A sua história de superação é a sua maior fonte de força.",
-    "Movimento constante, mesmo que lento, sempre chega ao destino.",
-    "O que você pratica mentalmente, manifesta fisicamente.",
-    "Seja o observador dos seus pensamentos, não a vítima deles.",
-    "A grandeza não é uma habilidade — é uma escolha repetida.",
-    "Você não precisa de aprovação para ser quem você é.",
-    "O medo diminui quando você age apesar dele.",
-    "Aprenda algo novo hoje. Seu cérebro agradece.",
-    "A sua presença no mundo faz diferença. Acredite nisso.",
-    "O melhor momento para plantar uma árvore foi há 20 anos. O segundo melhor é agora.",
-    "Consciência é o primeiro passo de toda transformação.",
-    "Você é mais do que seus pensamentos — você é quem os observa.",
-    "A paciência é uma forma ativa de fé no processo.",
-    "Invista em silêncio. As melhores respostas vêm do interior.",
-    "Sua alma sabe o caminho. Aprenda a ouvi-la.",
-    "Cada escolha consciente é um ato de poder pessoal.",
-    "O desenvolvimento pessoal não tem linha de chegada — tem horizonte.",
-    "Você é digno de tudo que deseja criar na sua vida.",
-    "A mente que se conhece não se perde nos julgamentos alheios.",
-    "Transforme sua dor em aprendizado e seu aprendizado em força.",
-    "O hoje bem vivido constrói o amanhã que você deseja.",
-    "Sua energia é preciosa. Invista-a em quem e no que importa.",
-    "A leveza interior começa quando você solta o que não controla.",
-    "Você tem permissão para recomeçar quantas vezes precisar.",
-    "A mente expandida nunca retorna ao que era — e isso é bom.",
-    "Seja intencional. A vida intencional é uma vida bem vivida.",
-    "O autodomínio é a forma mais elevada de liberdade.",
-    "Você carrega em si a capacidade de se reinventar.",
-    "A curiosidade sobre si mesmo é o início de toda sabedoria.",
-    "Cada dia é um presente — por isso se chama presente.",
-    "Quem aprende a controlar a mente aprende a controlar a vida.",
-    "A sua paz interior é a sua maior conquista.",
-    "Sonhe grande, planeje com clareza, aja com coragem.",
-    "O que você repete se torna seu caráter. Repita o bem.",
-    "A autenticidade atrai o que é verdadeiro. Seja você mesmo.",
-    "Você tem o poder de ressignificar qualquer experiência.",
-    "A mente clara vê soluções onde a mente turva vê problemas.",
-    "Seu crescimento beneficia todos ao seu redor.",
-    "A força interior não grita — ela simplesmente age.",
-    "Não subestime o poder de um único dia bem aproveitado.",
-    "A versão mais elevada de você já existe — vá ao encontro dela.",
-    "Quem cultiva a mente colhe uma vida extraordinária.",
-    "O presente momento sempre terá sido. Faça-o valer.",
-    "Você é maior do que qualquer circunstância que enfrenta.",
-    "A mudança real começa quando você para de esperar que ela aconteça.",
-    "Seus valores são sua bússola. Mantenha-a calibrada.",
-    "A mente que descansa também cresce. Cuide do seu descanso.",
-    "Você não precisa de condições perfeitas para agir — aja agora.",
-    "O autoconhecimento é uma viagem sem fim e sem tédio.",
-    "Cada versão sua foi necessária para chegar até aqui.",
-    "A resiliência não é não cair — é saber como levantar.",
-    "Você é o único que pode decidir quem quer ser. Decida.",
-    "A mente disciplinada é o instrumento mais poderoso que existe.",
-    "Olhe para dentro antes de olhar para fora.",
-    "O crescimento acontece na borda do desconforto.",
-    "Você merece o tempo que investe em si mesmo.",
-    "A sua consciência expandida expande o mundo ao seu redor.",
-    "Seja curioso sobre quem você está se tornando.",
-    "A ação alinhada com os valores gera paz interior.",
-    "Você é um ser em constante evolução. Celebre isso.",
-    "O melhor livro que você pode ler é a história da sua própria vida.",
-    "Cada pensamento que você escolhe muda quem você é.",
-    "A sua transformação começa agora, neste exato momento.",
-    "Confie em você. Você já chegou longe — vai chegar mais longe ainda.",
-    "A mente que se renova todos os dias nunca envelhece por dentro.",
-    "Você tem uma história única para contar. Viva-a plenamente.",
-    "O crescimento interior é o único crescimento que nunca para.",
-    "A paz não é ausência de conflito — é presença de clareza.",
-    "Você é capaz. Você é suficiente. Você está no caminho certo.",
-  ];
+// MENSAGENS DO DIA
+const msgs = [
+  "Você é capaz de muito mais do que imagina. O primeiro passo é acreditar nisso.",
+  "Cada manhã é uma nova oportunidade de se tornar quem você quer ser.",
+  "A mudança que você busca lá fora começa dentro de você.",
+  "Seus pensamentos moldam sua realidade. Escolha-os com sabedoria.",
+  "O crescimento começa exatamente onde o conforto termina.",
+  "Você não precisa ser perfeito para começar. Comece e vá melhorando.",
+  "A disciplina de hoje é a liberdade de amanhã.",
+  "Pequenas ações consistentes criam grandes transformações.",
+  "Confie no processo. Os resultados chegam para quem persiste.",
+  "Sua mente é um jardim. Plante pensamentos que florescem.",
+  "O passado não define o futuro — suas escolhas de hoje definem.",
+  "Quem controla seus pensamentos controla sua vida.",
+  "Seja grato pelo que tem enquanto trabalha pelo que quer.",
+  "A coragem não é ausência de medo — é agir apesar dele.",
+  "Você é o resultado de tudo que escolheu pensar e fazer.",
+  "Cada obstáculo é um convite para crescer além dos seus limites.",
+  "A paz interior começa quando você para de lutar contra o que é.",
+  "Invista tempo em você — é o melhor investimento possível.",
+  "Sua história não acabou. O melhor capítulo ainda está por vir.",
+  "Autoconhecimento é a base de toda transformação real.",
+  "O que você faz hoje determina quem você será amanhã.",
+  "Grandes mudanças começam com uma pequena decisão corajosa.",
+  "Você tem força suficiente para superar qualquer desafio.",
+  "A vida recompensa quem age com intenção e consistência.",
+  "Seja a versão de você que o seu eu de 5 anos atrás precisava ver.",
+  "O silêncio interior é onde a sabedoria verdadeira habita.",
+  "Não compare sua jornada com a de ninguém. A sua é única.",
+  "Cada dia é uma folha em branco. Escreva algo que valha a pena.",
+  "A mente que se abre para uma nova ideia nunca volta ao tamanho original.",
+  "Seus limites existem apenas onde você acredita que existem.",
+  "A gratidão transforma o que temos em suficiente.",
+  "Foco não é fazer muitas coisas — é fazer as coisas certas.",
+  "O hábito que você constrói hoje constrói quem você será.",
+  "Você merece a vida que está sonhando. Agora vá buscá-la.",
+  "A sua energia vai para onde sua atenção está. Direcione-a bem.",
+  "Resistir à mudança é resistir ao crescimento.",
+  "O que você pensa sobre si mesmo é o que o mundo acreditará.",
+  "Seja paciente com o processo. As raízes crescem antes das flores.",
+  "A persistência transforma o impossível em inevitável.",
+  "Cuide da sua mente como cuida do seu corpo. Ela merece isso.",
+  "Cada desafio vencido expande o que você acredita ser capaz.",
+  "O sucesso é construído num momento de cada vez.",
+  "Não espere a motivação — construa a disciplina.",
+  "Você já superou 100% dos seus dias difíceis até agora.",
+  "A clareza mental começa com silêncio e autoobservação.",
+  "Escolha pensar grandes pensamentos. A mente cresce com eles.",
+  "O amor próprio não é vaidade — é necessidade.",
+  "Quando você muda a forma de ver as coisas, as coisas mudam.",
+  "A jornada de mil milhas começa com um único passo.",
+  "Você é mais resiliente do que acredita ser.",
+  "A ação imperfeita supera sempre a perfeição paralisante.",
+  "Cuide da sua paz como cuida das suas conquistas.",
+  "O que você tolera é o que você aceita. Eleve seus padrões.",
+  "Transformação não é um evento — é uma prática diária.",
+  "Você tem tudo que precisa para começar. Comece.",
+  "A mente treinada encontra oportunidade onde outros veem obstáculo.",
+  "Sua voz interior importa. Aprenda a escutá-la.",
+  "Crescer dói. Estagnar dói mais.",
+  "O agora é o único momento em que a vida realmente acontece.",
+  "Quem planta autoconhecimento colhe sabedoria.",
+  "Você é o arquiteto da sua própria consciência.",
+  "A mudança que você adia hoje é o arrependimento de amanhã.",
+  "Confie na sua intuição — ela conhece o caminho.",
+  "O equilíbrio não é encontrado — é construído todos os dias.",
+  "Seu potencial é maior do que qualquer dificuldade que enfrenta.",
+  "A mente em paz conquista mais do que a mente em guerra.",
+  "Escolha crescer mesmo quando é mais fácil ficar parado.",
+  "Você não falhou — você aprendeu. Há diferença enorme aí.",
+  "A autoconfiança é construída fazendo o que você teme.",
+  "Cada respiração consciente é um ato de presença e poder.",
+  "Não se julgue pelo que ainda não é. Valorize quem já se tornou.",
+  "O cuidado com a mente é o maior ato de amor próprio.",
+  "Quem conhece a si mesmo tem vantagem em qualquer situação.",
+  "A sua história de superação é a sua maior fonte de força.",
+  "Movimento constante, mesmo que lento, sempre chega ao destino.",
+  "O que você pratica mentalmente, manifesta fisicamente.",
+  "Seja o observador dos seus pensamentos, não a vítima deles.",
+  "A grandeza não é uma habilidade — é uma escolha repetida.",
+  "Você não precisa de aprovação para ser quem você é.",
+  "O medo diminui quando você age apesar dele.",
+  "Aprenda algo novo hoje. Seu cérebro agradece.",
+  "A sua presença no mundo faz diferença. Acredite nisso.",
+  "O melhor momento para plantar foi há 20 anos. O segundo melhor é agora.",
+  "Consciência é o primeiro passo de toda transformação.",
+  "Você é mais do que seus pensamentos — você é quem os observa.",
+  "A paciência é uma forma ativa de fé no processo.",
+  "Invista em silêncio. As melhores respostas vêm do interior.",
+  "Sua alma sabe o caminho. Aprenda a ouvi-la.",
+  "Cada escolha consciente é um ato de poder pessoal.",
+  "O desenvolvimento pessoal não tem linha de chegada — tem horizonte.",
+  "Você é digno de tudo que deseja criar na sua vida.",
+  "A mente que se conhece não se perde nos julgamentos alheios.",
+  "Transforme sua dor em aprendizado e seu aprendizado em força.",
+  "O hoje bem vivido constrói o amanhã que você deseja.",
+  "Sua energia é preciosa. Invista-a em quem e no que importa.",
+  "A leveza interior começa quando você solta o que não controla.",
+  "Você tem permissão para recomeçar quantas vezes precisar.",
+  "A mente expandida nunca retorna ao que era — e isso é bom.",
+  "Seja intencional. A vida intencional é uma vida bem vivida.",
+  "O autodomínio é a forma mais elevada de liberdade.",
+  "Você carrega em si a capacidade de se reinventar.",
+  "A curiosidade sobre si mesmo é o início de toda sabedoria.",
+  "Cada dia é um presente — por isso se chama presente.",
+  "Quem aprende a controlar a mente aprende a controlar a vida.",
+  "A sua paz interior é a sua maior conquista.",
+  "Sonhe grande, planeje com clareza, aja com coragem.",
+  "O que você repete se torna seu caráter. Repita o bem.",
+  "A autenticidade atrai o que é verdadeiro. Seja você mesmo.",
+  "Você tem o poder de ressignificar qualquer experiência.",
+  "A mente clara vê soluções onde a mente turva vê problemas.",
+  "Seu crescimento beneficia todos ao seu redor.",
+  "A força interior não grita — ela simplesmente age.",
+  "Não subestime o poder de um único dia bem aproveitado.",
+  "A versão mais elevada de você já existe — vá ao encontro dela.",
+  "Quem cultiva a mente colhe uma vida extraordinária.",
+  "O presente momento sempre terá sido. Faça-o valer.",
+  "Você é maior do que qualquer circunstância que enfrenta.",
+  "A mudança real começa quando você para de esperar que ela aconteça.",
+  "Seus valores são sua bússola. Mantenha-a calibrada.",
+  "A mente que descansa também cresce. Cuide do seu descanso.",
+  "Você não precisa de condições perfeitas para agir — aja agora.",
+  "O autoconhecimento é uma viagem sem fim e sem tédio.",
+  "Cada versão sua foi necessária para chegar até aqui.",
+  "A resiliência não é não cair — é saber como levantar.",
+  "Você é o único que pode decidir quem quer ser. Decida.",
+  "A mente disciplinada é o instrumento mais poderoso que existe.",
+  "Olhe para dentro antes de olhar para fora.",
+  "O crescimento acontece na borda do desconforto.",
+  "Você merece o tempo que investe em si mesmo.",
+  "A sua consciência expandida expande o mundo ao seu redor.",
+  "Seja curioso sobre quem você está se tornando.",
+  "A ação alinhada com os valores gera paz interior.",
+  "Você é um ser em constante evolução. Celebre isso.",
+  "O melhor livro que você pode ler é a história da sua própria vida.",
+  "Cada pensamento que você escolhe muda quem você é.",
+  "A sua transformação começa agora, neste exato momento.",
+  "Confie em você. Você já chegou longe — vai chegar mais longe ainda.",
+  "A mente que se renova todos os dias nunca envelhece por dentro.",
+  "Você tem uma história única para contar. Viva-a plenamente.",
+  "O crescimento interior é o único crescimento que nunca para.",
+  "A paz não é ausência de conflito — é presença de clareza.",
+  "Você é capaz. Você é suficiente. Você está no caminho certo.",
+];
 
-  const MAX_FREE = 5;
-  const TODAY = new Date().toDateString();
+const MAX = 5;
+const TODAY = new Date().toDateString();
+// Reseta se for um novo dia
+if (localStorage.getItem('msgDay') !== TODAY) {
+  localStorage.setItem('msgDay', TODAY);
+  localStorage.setItem('msgCount', '0');
+  localStorage.setItem('msgShown', '[]');
+}
+let count = parseInt(localStorage.getItem('msgCount') || '0');
+let shown = JSON.parse(localStorage.getItem('msgShown') || '[]');
+let timerInterval;
 
-  // Reseta se for um novo dia
-  if (sessionStorage.getItem('msgDate') !== TODAY) {
-    sessionStorage.setItem('msgDate', TODAY);
-    sessionStorage.setItem('msgCount', '0');
-    sessionStorage.setItem('msgShown', '[]');
-  }
-
-  let count = parseInt(sessionStorage.getItem('msgCount') || '0');
-  let shown = JSON.parse(sessionStorage.getItem('msgShown') || '[]');
-  let timerInterval;
-
-  function updateCounter() {
-    document.getElementById('msgCounter').textContent = count === 0 ? '1 de 5' : `${Math.min(count, MAX_FREE)} de ${MAX_FREE}`;
-  }
-
-  function nextMessage() {
-    if (count >= MAX_FREE) { showLock(); return; }
-
-    const pool = mensagens.filter((_, i) => !shown.includes(i));
-    const pick = pool[Math.floor(Math.random() * pool.length)];
-    const randomIndex = mensagens.indexOf(pick);
-    shown.push(randomIndex);
-    count++;
-    sessionStorage.setItem('msgCount', count);
-    sessionStorage.setItem('msgShown', JSON.stringify(shown));
-
-    const textEl = document.getElementById('msgText');
-    textEl.classList.add('fade');
-    setTimeout(() => {
-      textEl.textContent = mensagens[randomIndex];
-      textEl.classList.remove('fade');
-    }, 300);
-
-    document.getElementById('msgCounter').textContent = `${count} de ${MAX_FREE}`;
-
-    if (count >= MAX_FREE) {
-      setTimeout(showLock, 600);
-    } else {
-      document.getElementById('msgBtn').textContent = count === MAX_FREE - 1 ? 'Última mensagem gratuita ✦' : 'Próxima mensagem ✦';
-    }
-  }
-
-  function showLock() {
-    document.getElementById('msgContent').style.display = 'none';
+function updateUI() {
+  document.getElementById('msgCounter').textContent = count === 0 ? '1 de 5' : Math.min(count, MAX) + ' de 5';
+  if (count >= MAX) {
+    document.getElementById('msgBody').style.display = 'none';
     document.getElementById('msgBtn').style.display = 'none';
     document.getElementById('msgLocked').style.display = 'block';
     startTimer(10 * 60);
   }
+}
 
-  function startTimer(seconds) {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      seconds--;
-      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-      const s = String(seconds % 60).padStart(2, '0');
-      const el = document.getElementById('timer');
-      if (el) el.textContent = `${m}:${s}`;
-      if (seconds <= 0) clearInterval(timerInterval);
-    }, 1000);
+function nextMessage() {
+  if (count >= MAX) { updateUI(); return; }
+  const available = msgs.map((_, i) => i).filter(i => !shown.includes(i));
+  const pick = available[Math.floor(Math.random() * available.length)];
+  shown.push(pick);
+  count++;
+  localStorage.setItem('msgCount', count);
+  localStorage.setItem('msgShown', JSON.stringify(shown));
+  const el = document.getElementById('msgText');
+  el.classList.add('fade');
+  setTimeout(() => { el.textContent = msgs[pick]; el.classList.remove('fade'); }, 300);
+  document.getElementById('msgCounter').textContent = count + ' de 5';
+  if (count < MAX) {
+    document.getElementById('msgBtn').textContent = count === MAX - 1 ? 'Última mensagem gratuita ✦' : 'Próxima mensagem ✦';
+  } else {
+    setTimeout(updateUI, 500);
   }
+}
 
-  function resetMessages() {
-    count = 0;
-    shown = [];
-    sessionStorage.setItem('msgCount', '0');
-    sessionStorage.setItem('msgShown', '[]');
-    document.getElementById('msgContent').style.display = 'flex';
-    document.getElementById('msgBtn').style.display = 'block';
-    document.getElementById('msgBtn').textContent = 'Revelar mensagem ✦';
-    document.getElementById('msgLocked').style.display = 'none';
-    document.getElementById('msgCounter').textContent = '1 de 5';
-    document.getElementById('msgText').textContent = 'Clique para receber sua mensagem de hoje...';
-    clearInterval(timerInterval);
-  }
+function resetMessages() {
+  count = 0; shown = [];
+  localStorage.setItem('msgCount', '0');
+  localStorage.setItem('msgShown', '[]');
+  document.getElementById('msgBody').style.display = 'flex';
+  document.getElementById('msgBtn').style.display = 'block';
+  document.getElementById('msgBtn').textContent = 'Revelar mensagem ✦';
+  document.getElementById('msgLocked').style.display = 'none';
+  document.getElementById('msgText').textContent = 'Toque para receber sua mensagem de hoje...';
+  document.getElementById('msgCounter').textContent = '1 de 5';
+  clearInterval(timerInterval);
+}
 
-  updateCounter();
-  if (count >= MAX_FREE) showLock();
-    "Cada manhã é uma nova oportunidade de se tornar quem você quer ser.",
-    "A mudança que você busca lá fora começa dentro de você.",
-    "Seus pensamentos moldam sua realidade. Escolha-os com sabedoria.",
-    "O crescimento começa exatamente onde o conforto termina.",
-    "Você não precisa ser perfeito para começar. Comece e vá melhorando.",
-    "A disciplina de hoje é a liberdade de amanhã.",
-    "Pequenas ações consistentes criam grandes transformações.",
-    "Confie no processo. Os resultados chegam para quem persiste.",
-    "Sua mente é um jardim. Plante pensamentos que florescem.",
-    "O passado não define o futuro — suas escolhas de hoje definem.",
-    "Quem controla seus pensamentos controla sua vida.",
-    "Seja grato pelo que tem enquanto trabalha pelo que quer.",
-    "A coragem não é ausência de medo — é agir apesar dele.",
-    "Você é o resultado de tudo que escolheu pensar e fazer.",
-    "Cada obstáculo é um convite para crescer além dos seus limites.",
-    "A paz interior começa quando você para de lutar contra o que é.",
-    "Invista tempo em você — é o melhor investimento possível.",
-    "Sua história não acabou. O melhor capítulo ainda está por vir.",
-    "Autoconhecimento é a base de toda transformação real.",
-    "O que você faz hoje determina quem você será amanhã.",
-    "Grandes mudanças começam com uma pequena decisão corajosa.",
-    "Você tem força suficiente para superar qualquer desafio.",
-    "A vida recompensa quem age com intenção e consistência.",
-    "Seja a versão de você que o seu eu de 5 anos atrás precisava ver.",
-    "O silêncio interior é onde a sabedoria verdadeira habita.",
-    "Não compare sua jornada com a de ninguém. A sua é única.",
-    "Cada dia é uma folha em branco. Escreva algo que valha a pena.",
-    "A mente que se abre para uma nova ideia nunca volta ao tamanho original.",
-    "Seus limites existem apenas onde você acredita que existem.",
-    "A gratidão transforma o que temos em suficiente.",
-    "Foco não é fazer muitas coisas — é fazer as coisas certas.",
-    "O hábito que você constrói hoje constrói quem você será.",
-    "Você merece a vida que está sonhando. Agora vá buscá-la.",
-    "A sua energia vai para onde sua atenção está. Direcione-a bem.",
-    "Resistir à mudança é resistir ao crescimento.",
-    "O que você pensa sobre si mesmo é o que o mundo acreditará.",
-    "Seja paciente com o processo. As raízes crescem antes das flores.",
-    "A persistência transforma o impossível em inevitável.",
-    "Cuide da sua mente como cuida do seu corpo. Ela merece isso.",
-    "Cada desafio vencido expande o que você acredita ser capaz.",
-    "O sucesso é construído num momento de cada vez.",
-    "Não espere a motivação — construa a disciplina.",
-    "Você já superou 100% dos seus dias difíceis até agora.",
-    "A clareza mental começa com silêncio e autoobservação.",
-    "Escolha pensar grandes pensamentos. A mente cresce com eles.",
-    "O amor próprio não é vaidade — é necessidade.",
-    "Quando você muda a forma de ver as coisas, as coisas mudam.",
-    "A jornada de mil milhas começa com um único passo.",
-    "Você é mais resiliente do que acredita ser.",
-    "A ação imperfeita supera sempre a perfeição paralisante.",
-    "Cuide da sua paz como cuida das suas conquistas.",
-    "O que você tolera é o que você aceita. Eleve seus padrões.",
-    "Transformação não é um evento — é uma prática diária.",
-    "Você tem tudo que precisa para começar. Comece.",
-    "A mente treinada encontra oportunidade onde outros veem obstáculo.",
-    "Sua voz interior importa. Aprenda a escutá-la.",
-    "Crescer dói. Estagnar dói mais.",
-    "O agora é o único momento em que a vida realmente acontece.",
-    "Quem planta autoconhecimento colhe sabedoria.",
-    "Você é o arquiteto da sua própria consciência.",
-    "A mudança que você adia hoje é o arrependimento de amanhã.",
-    "Confie na sua intuição — ela conhece o caminho.",
-    "O equilíbrio não é encontrado — é construído todos os dias.",
-    "Seu potencial é maior do que qualquer dificuldade que enfrenta.",
-    "A mente em paz conquista mais do que a mente em guerra.",
-    "Escolha crescer mesmo quando é mais fácil ficar parado.",
-    "Você não falhou — você aprendeu. Há diferença enorme aí.",
-    "A autoconfiança é construída fazendo o que você teme.",
-    "Cada respiração consciente é um ato de presença e poder.",
-    "Não se julgue pelo que ainda não é. Valorize quem já se tornou.",
-    "O cuidado com a mente é o maior ato de amor próprio.",
-    "Quem conhece a si mesmo tem vantagem em qualquer situação.",
-    "A sua história de superação é a sua maior fonte de força.",
-    "Movimento constante, mesmo que lento, sempre chega ao destino.",
-    "O que você pratica mentalmente, manifesta fisicamente.",
-    "Seja o observador dos seus pensamentos, não a vítima deles.",
-    "A grandeza não é uma habilidade — é uma escolha repetida.",
-    "Você não precisa de aprovação para ser quem você é.",
-    "O medo diminui quando você age apesar dele.",
-    "Aprenda algo novo hoje. Seu cérebro agradece.",
-    "A sua presença no mundo faz diferença. Acredite nisso.",
-    "O melhor momento para plantar uma árvore foi há 20 anos. O segundo melhor é agora.",
-    "Consciência é o primeiro passo de toda transformação.",
-    "Você é mais do que seus pensamentos — você é quem os observa.",
-    "A paciência é uma forma ativa de fé no processo.",
-    "Invista em silêncio. As melhores respostas vêm do interior.",
-    "Sua alma sabe o caminho. Aprenda a ouvi-la.",
-    "Cada escolha consciente é um ato de poder pessoal.",
-    "O desenvolvimento pessoal não tem linha de chegada — tem horizonte.",
-    "Você é digno de tudo que deseja criar na sua vida.",
-    "A mente que se conhece não se perde nos julgamentos alheios.",
-    "Transforme sua dor em aprendizado e seu aprendizado em força.",
-    "O hoje bem vivido constrói o amanhã que você deseja.",
-    "Sua energia é preciosa. Invista-a em quem e no que importa.",
-    "A leveza interior começa quando você solta o que não controla.",
-    "Você tem permissão para recomeçar quantas vezes precisar.",
-    "A mente expandida nunca retorna ao que era — e isso é bom.",
-    "Seja intencional. A vida intencional é uma vida bem vivida.",
-    "O autodomínio é a forma mais elevada de liberdade.",
-    "Você carrega em si a capacidade de se reinventar.",
-    "A curiosidade sobre si mesmo é o início de toda sabedoria.",
-    "Cada dia é um presente — por isso se chama presente.",
-    "Quem aprende a controlar a mente aprende a controlar a vida.",
-    "A sua paz interior é a sua maior conquista.",
-    "Sonhe grande, planeje com clareza, aja com coragem.",
-    "O que você repete se torna seu caráter. Repita o bem.",
-    "A autenticidade atrai o que é verdadeiro. Seja você mesmo.",
-    "Você tem o poder de ressignificar qualquer experiência.",
-    "A mente clara vê soluções onde a mente turva vê problemas.",
-    "Seu crescimento beneficia todos ao seu redor.",
-    "A força interior não grita — ela simplesmente age.",
-    "Não subestime o poder de um único dia bem aproveitado.",
-    "A versão mais elevada de você já existe — vá ao encontro dela.",
-    "Quem cultiva a mente colhe uma vida extraordinária.",
-    "O presente momento sempre terá sido. Faça-o valer.",
-    "Você é maior do que qualquer circunstância que enfrenta.",
-    "A mudança real começa quando você para de esperar que ela aconteça.",
-    "Seus valores são sua bússola. Mantenha-a calibrada.",
-    "A mente que descansa também cresce. Cuide do seu descanso.",
-    "Você não precisa de condições perfeitas para agir — aja agora.",
-    "O autoconhecimento é uma viagem sem fim e sem tédio.",
-    "Cada versão sua foi necessária para chegar até aqui.",
-    "A resiliência não é não cair — é saber como levantar.",
-    "Você é o único que pode decidir quem quer ser. Decida.",
-    "A mente disciplinada é o instrumento mais poderoso que existe.",
-    "Olhe para dentro antes de olhar para fora.",
-    "O crescimento acontece na borda do desconforto.",
-    "Você merece o tempo que investe em si mesmo.",
-    "A sua consciência expandida expande o mundo ao seu redor.",
-    "Seja curioso sobre quem você está se tornando.",
-    "A ação alinhada com os valores gera paz interior.",
-    "Você é um ser em constante evolução. Celebre isso.",
-    "O melhor livro que você pode ler é a história da sua própria vida.",
-    "Cada pensamento que você escolhe muda quem você é.",
-    "A sua transformação começa agora, neste exato momento.",
-    "Confie em você. Você já chegou longe — vai chegar mais longe ainda.",
-    "A mente que se renova todos os dias nunca envelhece por dentro.",
-    "Você tem uma história única para contar. Viva-a plenamente.",
-    "O crescimento interior é o único crescimento que nunca para.",
-    "A paz não é ausência de conflito — é presença de clareza.",
-    "Você é capaz. Você é suficiente. Você está no caminho certo.",
-  ];
+function startTimer(s) {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    s--;
+    const el = document.getElementById('timer');
+    if (el) el.textContent = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+    if (s <= 0) clearInterval(timerInterval);
+  }, 1000);
+}
 
-  const MAX_FREE = 5;
-  // Reset a cada nova sessão (aba nova ou após fechar o navegador)
-  const sessionKey = 'msgSession_' + new Date().toDateString();
-  if (!sessionStorage.getItem(sessionKey)) {
-    sessionStorage.clear();
-    sessionStorage.setItem(sessionKey, '1');
-  }
-  let count = parseInt(sessionStorage.getItem('msgCount') || '0');
-  let shown = JSON.parse(sessionStorage.getItem('msgShown') || '[]');
-  let timerInterval;
-
-  function updateCounter() {
-    document.getElementById('msgCounter').textContent = count === 0 ? '1 de 5' : `${Math.min(count, MAX_FREE)} de ${MAX_FREE}`;
-  }
-
-  function nextMessage() {
-    if (count >= MAX_FREE) { showLock(); return; }
-
-    const available = mensagens.filter((_, i) => !shown.includes(i));
-    if (available.length === 0) { shown = []; sessionStorage.setItem('msgShown', '[]'); }
-
-    const pool = mensagens.filter((_, i) => !shown.includes(i));
-    const randomIndex = mensagens.indexOf(pool[Math.floor(Math.random() * pool.length)]);
-    shown.push(randomIndex);
-    count++;
-    sessionStorage.setItem('msgCount', count);
-    sessionStorage.setItem('msgShown', JSON.stringify(shown));
-
-    const textEl = document.getElementById('msgText');
-    textEl.classList.add('fade');
-    setTimeout(() => {
-      textEl.textContent = mensagens[randomIndex];
-      textEl.classList.remove('fade');
-    }, 300);
-
-    document.getElementById('msgCounter').textContent = `${count} de ${MAX_FREE}`;
-
-    if (count >= MAX_FREE) {
-      setTimeout(showLock, 600);
-    } else {
-      document.getElementById('msgBtn').textContent = count === MAX_FREE - 1 ? 'Última mensagem gratuita ✦' : 'Próxima mensagem ✦';
-    }
-  }
-
-  function showLock() {
-    document.getElementById('msgContent').style.display = 'none';
-    document.getElementById('msgBtn').style.display = 'none';
-    document.getElementById('msgLocked').style.display = 'block';
-    startTimer(10 * 60);
-  }
-
-  function startTimer(seconds) {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      seconds--;
-      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-      const s = String(seconds % 60).padStart(2, '0');
-      const el = document.getElementById('timer');
-      if (el) el.textContent = `${m}:${s}`;
-      if (seconds <= 0) clearInterval(timerInterval);
-    }, 1000);
-  }
-
-  function resetMessages() {
-    count = 0;
-    shown = [];
-    sessionStorage.setItem('msgCount', '0');
-    sessionStorage.setItem('msgShown', '[]');
-    document.getElementById('msgContent').style.display = 'flex';
-    document.getElementById('msgBtn').style.display = 'block';
-    document.getElementById('msgBtn').textContent = 'Revelar mensagem ✦';
-    document.getElementById('msgLocked').style.display = 'none';
-    document.getElementById('msgCounter').textContent = '1 de 5';
-    document.getElementById('msgText').textContent = 'Clique para receber sua mensagem de hoje...';
-    clearInterval(timerInterval);
-  }
-
-  updateCounter();
-  if (count >= MAX_FREE) showLock();
+updateUI();
 </script>
 
 </body>

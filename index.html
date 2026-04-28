@@ -787,6 +787,21 @@
     transition: all .2s;
   }
   .lock-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .lock-read {
+    display: block;
+    background: transparent;
+    border: 1px solid rgba(26,26,46,.15);
+    color: var(--ink2);
+    padding: 9px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 500;
+    margin-bottom: .75rem;
+    transition: all .2s;
+    text-align: center;
+  }
+  .lock-read:hover { background: var(--bg2); color: var(--ink); }
   .reset-btn {
     background: transparent;
     border: 1px solid var(--bg2);
@@ -851,13 +866,14 @@
       <!-- BLOQUEIO -->
       <div class="msg-locked" id="msgLocked" style="display:none;">
         <div class="lock-symbol">🔒</div>
-        <p class="lock-title">Você chegou ao limite gratuito!</p>
-        <p class="lock-sub">Continue sua jornada de transformação com a coleção completa 72 Degraus.</p>
+        <p class="lock-title">Você chegou ao limite de hoje!</p>
+        <p class="lock-sub">Volte amanhã para 5 novas mensagens — ou aproveite a oferta relâmpago e leve a jornada completa.</p>
         <div class="flash-badge" id="flashBadge">
           🔥 Oferta Relâmpago · <span id="timer">10:00</span>
         </div>
-        <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="lock-cta">Quero continuar minha jornada →</a>
-        <button class="reset-btn" onclick="resetMessages()">Recomeçar (5 novas mensagens)</button>
+        <a href="https://diegobenem.github.io/novaconsciencia/" target="_blank" class="lock-cta">Quero a coleção completa →</a>
+        <a href="#artigos" class="lock-read">📖 Continuar lendo os artigos gratuitos</a>
+        <button class="reset-btn" onclick="resetMessages()">↩ Recomeçar agora (5 novas mensagens)</button>
       </div>
     </div>
   </div>
@@ -994,6 +1010,60 @@
       </div>
     </a>
 
+    <!-- CARD AGOSTINHO -->
+    <a href="artigos/agostinho-interior.html" class="article-card">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #1a0a2e, #4a2060);">
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
+        <div class="thumb-icon">📜</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag" style="color:#9b6fc4;">Filosofia Cristã</p>
+        <h3 class="article-title">Santo Agostinho e o Homem que se Perdeu para se Encontrar</h3>
+        <p class="article-excerpt">O que um filósofo do século IV tem a dizer para o homem moderno? Muito mais do que você imagina. A jornada de Agostinho é o espelho mais honesto da alma humana.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>7 min de leitura</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD ESPIRITUALIDADE -->
+    <a href="artigos/silencio-interior.html" class="article-card">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #0a1a2e, #1a4060);">
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
+        <div class="thumb-icon">🕊️</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag" style="color:#6aadcf;">Espiritualidade</p>
+        <h3 class="article-title">O Silêncio que Transforma: A Arte de Ouvir a Própria Alma</h3>
+        <p class="article-excerpt">Em um mundo de ruído constante, o silêncio interior se tornou o ato mais revolucionário que existe. Descubra como cultivá-lo e o que ele revela.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>5 min de leitura</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD PROPÓSITO -->
+    <a href="artigos/proposito-espiritualidade.html" class="article-card">
+      <div class="article-thumb" style="background: linear-gradient(135deg, #1a2a0e, #3a6020);">
+        <div class="thumb-circle2"></div>
+        <div class="thumb-circle"></div>
+        <div class="thumb-icon">🌟</div>
+      </div>
+      <div class="article-body">
+        <p class="article-tag" style="color:#7ab854;">Propósito & Fé</p>
+        <h3 class="article-title">Viktor Frankl, C.S. Lewis e o Sentido da Vida: O que a Filosofia Cristã Ensina sobre Propósito</h3>
+        <p class="article-excerpt">Dois pensadores, dois séculos diferentes, uma mesma descoberta: a vida sem propósito é um vazio que nenhuma conquista preenche. E a fé tem muito a dizer sobre isso.</p>
+        <div class="article-meta">
+          <span>Diego Benem</span>
+          <span>8 min de leitura</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -1090,43 +1160,44 @@
 
     <div class="christian-grid">
 
-      <div class="christian-card" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+      <div class="christian-card" onclick="window.location='artigos/filosofos-cristaos-autoconhecimento.html'">
         <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <p class="card-verse">"Porque sou eu que conheço os planos que tenho para vocês, planos de fazê-los prosperar..."</p>
-        <span class="card-ref">Jeremias 29:11</span>
-        <h4 class="card-christian-title">Propósito Divino: Como Encontrar o Chamado da Sua Vida</h4>
-        <p class="card-christian-excerpt">Uma reflexão profunda sobre como a fé e o autoconhecimento se unem para revelar o propósito que Deus tem para cada um de nós.</p>
+        <p class="card-verse">"Nosso coração está inquieto até que descanse em Ti."</p>
+        <span class="card-ref">Santo Agostinho — Confissões</span>
+        <h4 class="card-christian-title">O que os Grandes Filósofos Cristãos Sabiam Sobre Autoconhecimento</h4>
+        <p class="card-christian-excerpt">Agostinho, Pascal, Tomás de Aquino e C.S. Lewis chegaram a profundidades que a psicologia moderna ainda tenta alcançar.</p>
       </div>
 
-      <div class="christian-card" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+      <div class="christian-card" onclick="window.location='artigos/proposito-e-chamado-espiritual.html'">
         <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <p class="card-verse">"Renovai-vos no espírito da vossa mente."</p>
-        <span class="card-ref">Efésios 4:23</span>
-        <h4 class="card-christian-title">Renovação Mental pela Fé: O que a Neurociência e a Bíblia têm em Comum</h4>
-        <p class="card-christian-excerpt">A ciência e a Palavra de Deus apontam para o mesmo caminho: a transformação começa na mente. Descubra como.</p>
+        <p class="card-verse">"Antes de te formar no ventre materno, eu te conheci."</p>
+        <span class="card-ref">Jeremias 1:5</span>
+        <h4 class="card-christian-title">Propósito e Chamado: Como a Espiritualidade Revela Quem Você Veio Ser</h4>
+        <p class="card-christian-excerpt">Você não inventa seu propósito — você o descobre. Um guia prático e espiritual para encontrar seu chamado.</p>
       </div>
 
-      <div class="christian-card" onclick="document.querySelector('.newsletter').scrollIntoView({behavior:'smooth'})">
+      <div class="christian-card" onclick="window.location='artigos/fe-e-crencas-limitantes.html'">
         <div class="card-lock">
-          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <p class="card-verse">"Tudo posso naquele que me fortalece."</p>
-        <span class="card-ref">Filipenses 4:13</span>
-        <h4 class="card-christian-title">Vencendo Crenças Limitantes com a Força da Fé</h4>
-        <p class="card-christian-excerpt">Crenças limitantes são correntes invisíveis. A fé é a chave. Um estudo prático para libertar sua mente e expandir seus horizontes.</p>
+        <p class="card-verse">"Transformai-vos pela renovação da vossa mente."</p>
+        <span class="card-ref">Romanos 12:2</span>
+        <h4 class="card-christian-title">A Mente Liberta: Como a Fé Quebra as Correntes das Crenças Limitantes</h4>
+        <p class="card-christian-excerpt">Crenças limitantes são grades invisíveis. A fé oferece algo que vai além de qualquer técnica: uma nova identidade.</p>
+      </div>
+
+      <div class="christian-card" onclick="window.location='artigos/fe-e-autoconhecimento.html'">
+        <div class="card-lock">
+          <svg viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="8" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 8V5a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <p class="card-verse">"Examina-me, ó Deus, e conhece o meu coração."</p>
+        <span class="card-ref">Salmos 139:23</span>
+        <h4 class="card-christian-title">Fé e Autoconhecimento: Como a Espiritualidade Transforma o Interior</h4>
+        <p class="card-christian-excerpt">Quando a jornada de autoconhecimento encontra a fé, algo poderoso acontece. Três práticas espirituais que aprofundam quem você é.</p>
       </div>
 
     </div>
@@ -1323,12 +1394,240 @@
   ];
 
   const MAX_FREE = 5;
+  const TODAY = new Date().toDateString();
+
+  // Reseta se for um novo dia
+  if (sessionStorage.getItem('msgDate') !== TODAY) {
+    sessionStorage.setItem('msgDate', TODAY);
+    sessionStorage.setItem('msgCount', '0');
+    sessionStorage.setItem('msgShown', '[]');
+  }
+
   let count = parseInt(sessionStorage.getItem('msgCount') || '0');
   let shown = JSON.parse(sessionStorage.getItem('msgShown') || '[]');
   let timerInterval;
 
   function updateCounter() {
-    const remaining = MAX_FREE - count;
+    document.getElementById('msgCounter').textContent = count === 0 ? '1 de 5' : `${Math.min(count, MAX_FREE)} de ${MAX_FREE}`;
+  }
+
+  function nextMessage() {
+    if (count >= MAX_FREE) { showLock(); return; }
+
+    const pool = mensagens.filter((_, i) => !shown.includes(i));
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    const randomIndex = mensagens.indexOf(pick);
+    shown.push(randomIndex);
+    count++;
+    sessionStorage.setItem('msgCount', count);
+    sessionStorage.setItem('msgShown', JSON.stringify(shown));
+
+    const textEl = document.getElementById('msgText');
+    textEl.classList.add('fade');
+    setTimeout(() => {
+      textEl.textContent = mensagens[randomIndex];
+      textEl.classList.remove('fade');
+    }, 300);
+
+    document.getElementById('msgCounter').textContent = `${count} de ${MAX_FREE}`;
+
+    if (count >= MAX_FREE) {
+      setTimeout(showLock, 600);
+    } else {
+      document.getElementById('msgBtn').textContent = count === MAX_FREE - 1 ? 'Última mensagem gratuita ✦' : 'Próxima mensagem ✦';
+    }
+  }
+
+  function showLock() {
+    document.getElementById('msgContent').style.display = 'none';
+    document.getElementById('msgBtn').style.display = 'none';
+    document.getElementById('msgLocked').style.display = 'block';
+    startTimer(10 * 60);
+  }
+
+  function startTimer(seconds) {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      seconds--;
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      const el = document.getElementById('timer');
+      if (el) el.textContent = `${m}:${s}`;
+      if (seconds <= 0) clearInterval(timerInterval);
+    }, 1000);
+  }
+
+  function resetMessages() {
+    count = 0;
+    shown = [];
+    sessionStorage.setItem('msgCount', '0');
+    sessionStorage.setItem('msgShown', '[]');
+    document.getElementById('msgContent').style.display = 'flex';
+    document.getElementById('msgBtn').style.display = 'block';
+    document.getElementById('msgBtn').textContent = 'Revelar mensagem ✦';
+    document.getElementById('msgLocked').style.display = 'none';
+    document.getElementById('msgCounter').textContent = '1 de 5';
+    document.getElementById('msgText').textContent = 'Clique para receber sua mensagem de hoje...';
+    clearInterval(timerInterval);
+  }
+
+  updateCounter();
+  if (count >= MAX_FREE) showLock();
+    "Cada manhã é uma nova oportunidade de se tornar quem você quer ser.",
+    "A mudança que você busca lá fora começa dentro de você.",
+    "Seus pensamentos moldam sua realidade. Escolha-os com sabedoria.",
+    "O crescimento começa exatamente onde o conforto termina.",
+    "Você não precisa ser perfeito para começar. Comece e vá melhorando.",
+    "A disciplina de hoje é a liberdade de amanhã.",
+    "Pequenas ações consistentes criam grandes transformações.",
+    "Confie no processo. Os resultados chegam para quem persiste.",
+    "Sua mente é um jardim. Plante pensamentos que florescem.",
+    "O passado não define o futuro — suas escolhas de hoje definem.",
+    "Quem controla seus pensamentos controla sua vida.",
+    "Seja grato pelo que tem enquanto trabalha pelo que quer.",
+    "A coragem não é ausência de medo — é agir apesar dele.",
+    "Você é o resultado de tudo que escolheu pensar e fazer.",
+    "Cada obstáculo é um convite para crescer além dos seus limites.",
+    "A paz interior começa quando você para de lutar contra o que é.",
+    "Invista tempo em você — é o melhor investimento possível.",
+    "Sua história não acabou. O melhor capítulo ainda está por vir.",
+    "Autoconhecimento é a base de toda transformação real.",
+    "O que você faz hoje determina quem você será amanhã.",
+    "Grandes mudanças começam com uma pequena decisão corajosa.",
+    "Você tem força suficiente para superar qualquer desafio.",
+    "A vida recompensa quem age com intenção e consistência.",
+    "Seja a versão de você que o seu eu de 5 anos atrás precisava ver.",
+    "O silêncio interior é onde a sabedoria verdadeira habita.",
+    "Não compare sua jornada com a de ninguém. A sua é única.",
+    "Cada dia é uma folha em branco. Escreva algo que valha a pena.",
+    "A mente que se abre para uma nova ideia nunca volta ao tamanho original.",
+    "Seus limites existem apenas onde você acredita que existem.",
+    "A gratidão transforma o que temos em suficiente.",
+    "Foco não é fazer muitas coisas — é fazer as coisas certas.",
+    "O hábito que você constrói hoje constrói quem você será.",
+    "Você merece a vida que está sonhando. Agora vá buscá-la.",
+    "A sua energia vai para onde sua atenção está. Direcione-a bem.",
+    "Resistir à mudança é resistir ao crescimento.",
+    "O que você pensa sobre si mesmo é o que o mundo acreditará.",
+    "Seja paciente com o processo. As raízes crescem antes das flores.",
+    "A persistência transforma o impossível em inevitável.",
+    "Cuide da sua mente como cuida do seu corpo. Ela merece isso.",
+    "Cada desafio vencido expande o que você acredita ser capaz.",
+    "O sucesso é construído num momento de cada vez.",
+    "Não espere a motivação — construa a disciplina.",
+    "Você já superou 100% dos seus dias difíceis até agora.",
+    "A clareza mental começa com silêncio e autoobservação.",
+    "Escolha pensar grandes pensamentos. A mente cresce com eles.",
+    "O amor próprio não é vaidade — é necessidade.",
+    "Quando você muda a forma de ver as coisas, as coisas mudam.",
+    "A jornada de mil milhas começa com um único passo.",
+    "Você é mais resiliente do que acredita ser.",
+    "A ação imperfeita supera sempre a perfeição paralisante.",
+    "Cuide da sua paz como cuida das suas conquistas.",
+    "O que você tolera é o que você aceita. Eleve seus padrões.",
+    "Transformação não é um evento — é uma prática diária.",
+    "Você tem tudo que precisa para começar. Comece.",
+    "A mente treinada encontra oportunidade onde outros veem obstáculo.",
+    "Sua voz interior importa. Aprenda a escutá-la.",
+    "Crescer dói. Estagnar dói mais.",
+    "O agora é o único momento em que a vida realmente acontece.",
+    "Quem planta autoconhecimento colhe sabedoria.",
+    "Você é o arquiteto da sua própria consciência.",
+    "A mudança que você adia hoje é o arrependimento de amanhã.",
+    "Confie na sua intuição — ela conhece o caminho.",
+    "O equilíbrio não é encontrado — é construído todos os dias.",
+    "Seu potencial é maior do que qualquer dificuldade que enfrenta.",
+    "A mente em paz conquista mais do que a mente em guerra.",
+    "Escolha crescer mesmo quando é mais fácil ficar parado.",
+    "Você não falhou — você aprendeu. Há diferença enorme aí.",
+    "A autoconfiança é construída fazendo o que você teme.",
+    "Cada respiração consciente é um ato de presença e poder.",
+    "Não se julgue pelo que ainda não é. Valorize quem já se tornou.",
+    "O cuidado com a mente é o maior ato de amor próprio.",
+    "Quem conhece a si mesmo tem vantagem em qualquer situação.",
+    "A sua história de superação é a sua maior fonte de força.",
+    "Movimento constante, mesmo que lento, sempre chega ao destino.",
+    "O que você pratica mentalmente, manifesta fisicamente.",
+    "Seja o observador dos seus pensamentos, não a vítima deles.",
+    "A grandeza não é uma habilidade — é uma escolha repetida.",
+    "Você não precisa de aprovação para ser quem você é.",
+    "O medo diminui quando você age apesar dele.",
+    "Aprenda algo novo hoje. Seu cérebro agradece.",
+    "A sua presença no mundo faz diferença. Acredite nisso.",
+    "O melhor momento para plantar uma árvore foi há 20 anos. O segundo melhor é agora.",
+    "Consciência é o primeiro passo de toda transformação.",
+    "Você é mais do que seus pensamentos — você é quem os observa.",
+    "A paciência é uma forma ativa de fé no processo.",
+    "Invista em silêncio. As melhores respostas vêm do interior.",
+    "Sua alma sabe o caminho. Aprenda a ouvi-la.",
+    "Cada escolha consciente é um ato de poder pessoal.",
+    "O desenvolvimento pessoal não tem linha de chegada — tem horizonte.",
+    "Você é digno de tudo que deseja criar na sua vida.",
+    "A mente que se conhece não se perde nos julgamentos alheios.",
+    "Transforme sua dor em aprendizado e seu aprendizado em força.",
+    "O hoje bem vivido constrói o amanhã que você deseja.",
+    "Sua energia é preciosa. Invista-a em quem e no que importa.",
+    "A leveza interior começa quando você solta o que não controla.",
+    "Você tem permissão para recomeçar quantas vezes precisar.",
+    "A mente expandida nunca retorna ao que era — e isso é bom.",
+    "Seja intencional. A vida intencional é uma vida bem vivida.",
+    "O autodomínio é a forma mais elevada de liberdade.",
+    "Você carrega em si a capacidade de se reinventar.",
+    "A curiosidade sobre si mesmo é o início de toda sabedoria.",
+    "Cada dia é um presente — por isso se chama presente.",
+    "Quem aprende a controlar a mente aprende a controlar a vida.",
+    "A sua paz interior é a sua maior conquista.",
+    "Sonhe grande, planeje com clareza, aja com coragem.",
+    "O que você repete se torna seu caráter. Repita o bem.",
+    "A autenticidade atrai o que é verdadeiro. Seja você mesmo.",
+    "Você tem o poder de ressignificar qualquer experiência.",
+    "A mente clara vê soluções onde a mente turva vê problemas.",
+    "Seu crescimento beneficia todos ao seu redor.",
+    "A força interior não grita — ela simplesmente age.",
+    "Não subestime o poder de um único dia bem aproveitado.",
+    "A versão mais elevada de você já existe — vá ao encontro dela.",
+    "Quem cultiva a mente colhe uma vida extraordinária.",
+    "O presente momento sempre terá sido. Faça-o valer.",
+    "Você é maior do que qualquer circunstância que enfrenta.",
+    "A mudança real começa quando você para de esperar que ela aconteça.",
+    "Seus valores são sua bússola. Mantenha-a calibrada.",
+    "A mente que descansa também cresce. Cuide do seu descanso.",
+    "Você não precisa de condições perfeitas para agir — aja agora.",
+    "O autoconhecimento é uma viagem sem fim e sem tédio.",
+    "Cada versão sua foi necessária para chegar até aqui.",
+    "A resiliência não é não cair — é saber como levantar.",
+    "Você é o único que pode decidir quem quer ser. Decida.",
+    "A mente disciplinada é o instrumento mais poderoso que existe.",
+    "Olhe para dentro antes de olhar para fora.",
+    "O crescimento acontece na borda do desconforto.",
+    "Você merece o tempo que investe em si mesmo.",
+    "A sua consciência expandida expande o mundo ao seu redor.",
+    "Seja curioso sobre quem você está se tornando.",
+    "A ação alinhada com os valores gera paz interior.",
+    "Você é um ser em constante evolução. Celebre isso.",
+    "O melhor livro que você pode ler é a história da sua própria vida.",
+    "Cada pensamento que você escolhe muda quem você é.",
+    "A sua transformação começa agora, neste exato momento.",
+    "Confie em você. Você já chegou longe — vai chegar mais longe ainda.",
+    "A mente que se renova todos os dias nunca envelhece por dentro.",
+    "Você tem uma história única para contar. Viva-a plenamente.",
+    "O crescimento interior é o único crescimento que nunca para.",
+    "A paz não é ausência de conflito — é presença de clareza.",
+    "Você é capaz. Você é suficiente. Você está no caminho certo.",
+  ];
+
+  const MAX_FREE = 5;
+  // Reset a cada nova sessão (aba nova ou após fechar o navegador)
+  const sessionKey = 'msgSession_' + new Date().toDateString();
+  if (!sessionStorage.getItem(sessionKey)) {
+    sessionStorage.clear();
+    sessionStorage.setItem(sessionKey, '1');
+  }
+  let count = parseInt(sessionStorage.getItem('msgCount') || '0');
+  let shown = JSON.parse(sessionStorage.getItem('msgShown') || '[]');
+  let timerInterval;
+
+  function updateCounter() {
     document.getElementById('msgCounter').textContent = count === 0 ? '1 de 5' : `${Math.min(count, MAX_FREE)} de ${MAX_FREE}`;
   }
 
